@@ -1,0 +1,18 @@
+6:17:23 AM Script starting...
+6:17:23 AM Loading posts data...
+6:17:23 AM Posts loaded: 188
+6:17:23 AM Canvas ready
+6:17:23 AM Restoring 1 images
+6:17:23 AM Rendering 188 posts
+6:17:23 AM Adding checkboxes to 188 cards
+6:17:23 AM === GALLERY v0038 READY ===
+6:17:23 AM ✓ Images loading | ✓ Logs saving | ✓ Canvas tools
+6:17:24 AM ✓ 01.jpg
+6:17:24 AM ✓ 01.jpg
+6:17:24 AM ✓ 01.jpg
+6:17:24 AM ✓ 01.jpg
+6:17:24 AM ✓ 01.jpg
+6:17:24 AM ✓ 01.jpg
+6:17:24 AM ✓ 01.jpg
+6:17:24 AM ✓ 01.jpg
+6:17:24 AM ✓ 01.jpg

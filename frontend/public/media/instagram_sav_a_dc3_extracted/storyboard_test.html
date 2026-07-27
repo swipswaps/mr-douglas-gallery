@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Storyboard Image Load Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1e293b; color: white; }
+        .test-img { max-width: 200px; margin: 10px; border: 2px solid #475569; }
+        .log { background: #0f172a; padding: 10px; height: 300px; overflow-y: auto; font-size: 12px; }
+        button { background: #3b82f6; border: none; color: white; padding: 8px 16px; margin: 5px; cursor: pointer; }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h2>Storyboard Image Load Test</h2>
+    <p>This page tests if images from your gallery can be loaded into fabric.js</p>
+    
+    <div id="images" style="display:flex;flex-wrap:wrap;gap:10px;margin:20px 0"></div>
+    
+    <button id="loadTestBtn">Test Selected Images</button>
+    <button id="clearCanvas">Clear Canvas</button>
+    
+    <div style="margin: 20px 0">
+        <canvas id="canvas" width="400" height="533" style="border:2px solid #475569;background:white"></canvas>
+    </div>
+    
+    <div class="log" id="log"></div>
+    
+    <script>
+        var canvas = null;
+        var loadedImages = [];
+        
+        function addLog(msg, isError) {
+            var logDiv = document.getElementById('log');
+            var entry = document.createElement('div');
+            entry.className = isError ? 'error' : 'success';
+            entry.textContent = new Date().toLocaleTimeString() + ' ' + msg;
+            logDiv.appendChild(entry);
+            entry.scrollIntoView();
+            console.log(msg);
+        }
+        
+        function initCanvas() {
+            canvas = new fabric.Canvas('canvas');
+            canvas.setDimensions({ width: 400, height: 533 });
+            addLog('Canvas initialized');
+        }
+        
+        function loadImageToCanvas(src, name) {
+            addLog('Loading: ' + name);
+            fabric.Image.fromURL(src, function(img) {
+                if (!img) {
+                    addLog('FAILED: ' + name + ' - fabric returned null', true);
+                    return;
+                }
+                var scale = Math.min(180 / img.width, 250 / img.height);
+                img.scale(scale);
+                img.set({
+                    left: Math.random() * 200,
+                    top: Math.random() * 300,
+                    hasControls: true
+                });
+                canvas.add(img);
+                addLog('SUCCESS: ' + name + ' (' + img.width + 'x' + img.height + ')');
+                canvas.renderAll();
+            }, { crossOrigin: 'Anonymous' });
+        }
+        
+        function scanForImages() {
+            // Try to find images from the gallery if in iframe context
+            var container = document.getElementById('images');
+            
+            // Manual test images - use actual gallery paths
+            var testImages = [];
+            
+            // Look for timeline images (these are known to exist)
+            var timelineImages = [
+                'timeline/mr-douglas-1996.jpg',
+                'timeline/mr-douglas-1992.jpg',
+                'timeline/mr-douglas-1990.jpg'
+            ];
+            
+            for (var i = 0; i < timelineImages.length; i++) {
+                var fullPath = timelineImages[i];
+                testImages.push({ src: fullPath, name: fullPath.split('/').pop() });
+                var img = document.createElement('img');
+                img.src = fullPath;
+                img.className = 'test-img';
+                img.onload = function() { addLog('✓ Image exists: ' + this.src); };
+                img.onerror = function() { addLog('✗ Image MISSING: ' + this.src, true); };
+                container.appendChild(img);
+            }
+            
+            return testImages;
+        }
+        
+        document.getElementById('loadTestBtn').onclick = function() {
+            var images = scanForImages();
+            for (var i = 0; i < images.length; i++) {
+                loadImageToCanvas(images[i].src, images[i].name);
+            }
+        };
+        
+        document.getElementById('clearCanvas').onclick = function() {
+            canvas.clear();
+            canvas.backgroundColor = '#ffffff';
+            canvas.renderAll();
+            addLog('Canvas cleared');
+        };
+        
+        initCanvas();
+        scanForImages();
+        addLog('Ready - click "Test Selected Images" to load images into canvas');
+    </script>
+</body>
+</html>

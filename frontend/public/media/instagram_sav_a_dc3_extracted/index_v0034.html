@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr. Douglas Gallery v0034 - Working Gallery</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0f172a;color:#e2e8f0;font-family:system-ui}
+.search-header{position:sticky;top:0;z-index:20;background:rgba(15,23,42,0.95);backdrop-filter:blur(8px);border-bottom:1px solid #334155;padding:1rem}
+.search-container{max-width:1200px;margin:0 auto}
+.search-input{width:100%;padding:0.75rem 1rem;background:#1e293b;border:1px solid #475569;border-radius:2rem;color:#f1f5f9;font-size:1rem}
+.gallery-toolbar{position:sticky;top:90px;z-index:15;display:flex;gap:12px;margin:0 1.5rem 1rem;flex-wrap:wrap;align-items:center;background:#1e293b;padding:8px 12px;border-radius:12px}
+.gallery-toolbar button{background:#334155;color:white;border:none;padding:6px 12px;border-radius:8px;cursor:pointer}
+.gallery-toolbar button.primary{background:#3b82f6}
+.gallery-toolbar button.warning{background:#f59e0b}
+.gallery-toolbar button.success{background:#10b981}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;padding:1.5rem;max-width:1400px;margin:0 auto}
+.card{background:#1e293b;border-radius:1rem;overflow:hidden;cursor:pointer;position:relative;transition:transform 0.2s}
+.card:hover{transform:translateY(-4px)}
+.card-media{width:100%;aspect-ratio:4/3;object-fit:cover;background:#0f172a}
+.video-thumbnail{position:relative;width:100%;aspect-ratio:4/3;background:#0f172a;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.video-thumbnail video{width:100%;height:100%;object-fit:cover}
+.video-thumbnail .play-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:white;font-size:48px;width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.video-thumbnail .duration{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.7);color:white;padding:2px 6px;border-radius:4px;font-size:11px;pointer-events:none}
+.card-content{padding:1rem}
+.card-meta{display:flex;justify-content:space-between;font-size:0.75rem;color:#94a3b8;margin-bottom:0.5rem;flex-wrap:wrap}
+.author-name{color:#60a5fa}
+.card-caption{font-size:0.875rem;color:#cbd5e1;margin-bottom:0.75rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.select-checkbox{position:absolute;top:8px;left:8px;width:20px;height:20px;cursor:pointer;z-index:10}
+.carousel{display:flex;gap:0.5rem;overflow-x:auto;margin:0.5rem 0;padding-bottom:4px}
+.carousel-item{width:60px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer;background:#0f172a}
+.carousel-video-item{position:relative;width:60px;height:60px;border-radius:8px;cursor:pointer;overflow:hidden}
+.carousel-video-item video{width:100%;height:100%;object-fit:cover}
+.carousel-video-item .play-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:20px;text-shadow:0 0 2px black}
+.comments-btn{background:none;border:none;color:#3b82f6;cursor:pointer;font-size:0.7rem;padding:0.25rem 0.5rem;border-radius:1rem;background:#1e293b}
+.comments-btn:hover{background:#3b82f6;color:white}
+.card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem}
+.insta-link{font-size:0.75rem;color:#3b82f6;text-decoration:none}
+.storyboard-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:2000;overflow:auto}
+.storyboard-modal.active{display:flex;flex-direction:column}
+.storyboard-container{background:#1e293b;margin:20px auto;padding:20px;border-radius:16px;max-width:95%;width:1200px}
+#storyboardCanvas{border:2px solid #475569;border-radius:8px;background:white;display:block;margin:0 auto}
+.storyboard-controls{display:flex;gap:10px;justify-content:center;margin:15px 0;flex-wrap:wrap}
+.storyboard-controls button{background:#3b82f6;border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer}
+.storyboard-thumb{width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:pointer;margin-right:8px}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;color:#e2e8f0;padding:10px 20px;border-radius:40px;z-index:3000;opacity:0;transition:opacity 0.2s;pointer-events:none}
+.toast.show{opacity:1}
+.debug-panel{position:fixed;bottom:10px;right:10px;background:#1e293b;color:#0f0;font-family:monospace;font-size:10px;padding:8px;border-radius:8px;z-index:9999;max-width:500px;max-height:300px;overflow:auto;opacity:0.95}
+.debug-header{display:flex;justify-content:space-between;margin-bottom:5px;background:#334155;padding:4px 8px;border-radius:4px}
+.debug-close{color:#ef4444;cursor:pointer;margin-left:10px}
+.debug-save{color:#10b981;cursor:pointer;margin-right:10px}
+.image-status{font-size:9px;border-top:1px solid #334155;margin-top:5px;padding-top:5px}
+.lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;z-index:10000}
+.lightbox.active{display:flex}
+.lightbox-content{position:relative;max-width:90vw;max-height:90vh}
+.lightbox-media{max-width:90vw;max-height:85vh;object-fit:contain}
+.lightbox-close{position:absolute;top:-40px;right:-40px;color:white;font-size:2rem;cursor:pointer;background:rgba(0,0,0,0.5);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.lightbox-close:hover{background:#ef4444}
+.lightbox-caption{position:absolute;bottom:-60px;left:0;right:0;color:white;text-align:center;padding:10px;background:rgba(0,0,0,0.7);border-radius:8px;font-size:14px}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:white;border:none;font-size:2rem;cursor:pointer;padding:10px 15px;border-radius:50%;z-index:10001}
+.lightbox-nav:hover{background:rgba(0,0,0,0.8)}
+.lightbox-prev{left:20px}
+.lightbox-next{right:20px}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1e293b;border-radius:1rem;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;z-index:11000;display:none;padding:1rem}
+.modal.active{display:block}
+.modal-header{display:flex;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid #475569}
+.modal-close{color:#ef4444;cursor:pointer;font-size:1.5rem;line-height:1}
+.comment-item{padding:8px 12px;margin:4px 0;background:#0f172a;border-radius:8px;word-wrap:break-word}
+</style>
+</head>
+<body>
+
+<div class="debug-panel" id="debugPanel">
+    <div class="debug-header">
+        <strong>🔍 Debug Console</strong>
+        <span>
+            <span id="debugSaveBtn" class="debug-save">💾</span>
+            <span id="debugCloseBtn" class="debug-close">✕</span>
+        </span>
+    </div>
+    <div id="debugLog"></div>
+    <div id="imageStatusLog" class="image-status"></div>
+</div>
+
+<div class="search-header">
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search posts...">
+    </div>
+</div>
+
+<div class="gallery-toolbar">
+    <span>Select images:</span>
+    <button id="selectAllBtn">Select All</button>
+    <button id="deselectAllBtn">Deselect All</button>
+    <button id="syncSelectedBtn" class="primary">📋 Sync to Storyboard</button>
+    <button id="openStoryboardBtn" class="success">🎬 Open Storyboard <span id="storyboardCountBadge">0</span></button>
+    <button id="checkMissingBtn" class="warning">🔍 Check Missing</button>
+    <span id="selectedCount">0 selected</span>
+</div>
+
+<div id="galleryGrid" class="grid"></div>
+
+<div id="storyboardModal" class="storyboard-modal">
+    <div class="storyboard-container">
+        <div style="display:flex;justify-content:space-between;">
+            <h3>Storyboard Builder - 300 DPI Export</h3>
+            <button id="closeStoryboardBtn" style="background:#ef4444;border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer">Close</button>
+        </div>
+        <div class="storyboard-controls">
+            <select id="templateSelect">
+                <option value="grid">Grid (3 cols)</option>
+                <option value="center">Single centered</option>
+                <option value="masonry">Masonry</option>
+            </select>
+            <button id="applyTemplateBtn">Apply</button>
+            <button id="exportStoryboardBtn" class="primary">📸 Export 300 DPI PNG</button>
+            <button id="clearStoryboardBtn">Clear</button>
+        </div>
+        <canvas id="storyboardCanvas" width="1080" height="1440"></canvas>
+        <div><strong>Images (click to remove):</strong>
+            <div id="storyboardThumbnails" style="display:flex;gap:12px;overflow-x:auto;padding:8px;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<div id="lightbox" class="lightbox">
+    <button class="lightbox-nav lightbox-prev">‹</button>
+    <div class="lightbox-content">
+        <div id="lightboxCloseBtn" class="lightbox-close">×</div>
+        <div id="lightboxMediaContainer"></div>
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+    <button class="lightbox-nav lightbox-next">›</button>
+</div>
+
+<div id="commentsModal" class="modal">
+    <div class="modal-header">
+        <strong>💬 Comments</strong>
+        <span id="commentsModalClose" class="modal-close">&times;</span>
+    </div>
+    <div id="commentsList"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+<script>
+// Diagnostic: Check script execution
+(function() {
+    var debugDiv = document.getElementById("debugLog");
+    if(debugDiv) {
+        debugDiv.innerHTML = "<div>Script loaded at " + new Date().toLocaleTimeString() + "</div>";
+    }
+    console.log("SCRIPT LOADED");
+})();
+
+window.onerror = function(msg, url, line, col, error) {
+    var errorMsg = "ERROR: " + msg + " at line " + line;
+    console.error(errorMsg);
+    var debugDiv = document.getElementById("debugLog");
+    if(debugDiv) {
+        var entry = document.createElement("div");
+        entry.textContent = new Date().toLocaleTimeString() + " [ERROR] " + errorMsg;
+        entry.style.color = "#ef4444";
+        debugDiv.appendChild(entry);
+    }
+    return false;
+};
+
+console.log("=== GALLERY v0034 STARTING ===");
+
+// Load posts data
+var allPosts = [{"shortcode": "BsDz6DjHk9u", "author": "electroflytes", "date": "12/31/2018 12:08:53pm", "likes": 1750, "comments_count": 9, "caption": "One year ago today I stopped by Tullahoma Airport to retrieve data plate information off the right e", "folder_name": "027_12-31-2018", "all_media": ["01.jpg"], "comments": ["Comments for https://www.instagram.com/p/BsDz6DjHk9u/", "Count: 12", "Reported by IG: 9", "Saved: 05/11/2026 1:55:40pm", "[12/31/2018 5:51:56pm] @electroflytes · 1 likes"], "instagram_url": "https://www.instagram.com/p/BsDz6DjHk9u/"}, {"shortcode": "B6tYe7KJSz7", "author": "b_the_windcb2", "date": "12/30/2019 2:56:52pm", "likes": 149, "comments_count": 2, "caption": "Wishing everyone a prosperous New Year. Help us make Mister Douglas fly in this new year by making (", "folder_name": "151_12-30-2019", "all_media": ["01.jpg"], "comments": ["Comments for https://www.instagram.com/p/B6tYe7KJSz7/", "Count: 2", "Reported by IG: 2", "Saved: 05/11/2026 1:55:56pm", "[12/30/2019 6:49:54pm] @b_the_windcb2"], "instagram_url": "https://www.instagram.com/p/B6tYe7KJSz7/"}, {"shortcode": "BrfxJkTnDYV", "author": "nathanielstaats", "date": "12/17/2018 12:12:07pm", "likes": 83, "comments_count": 10, "caption": "Rudder is ready for stitching, 486 individual stitches to complete each aileron! If you can guess th", "folder_name": "025_12-17-2018", "all_media": ["01.jpg", "02.jpg", "03.jpg"], "comments": ["Comments for https://www.instagram.com/p/BrfxJkTnDYV/", "Count: 7", "Reported by IG: 10", "Saved: 05/11/2026 1:55:40pm", "[02/04/2019 10:22:09pm] @nathanielstaats · 1 likes · 2 replies"], "instagram_url": "https://www.instagram.com/p/BrfxJkTnDYV/"}, {"shortcode": "CI3dVuogQgj", "author": "pew_pew_austria", "date": "12/16/2020 12:11:13pm", "likes": 312, "comments_count": 12, "caption": "The Mr. Douglas Society would like to thank our Donors for there continued support during this pande", "folder_name": "165_12-16-2020", "all_media": ["01.jpg"], "comments": ["Comments for https://www.instagram.com/p/CI3dVuogQgj/", "Count: 14", "Reported by IG: 12", "Saved: 05/11/2026 1:55:58pm", "[04/20/2022 5:07:39am] @pew_pew_austria · 2 replies"], "instagram_url": "https://www.instagram.com/p/CI3dVuogQgj/"}, {"shortcode": "C02x8Gkg3tw", "author": "jimjeffries4u", "date": "12/14/2023 8:53:20pm", "likes": 116, "comments_count": 8, "caption": "Embry Riddle Aeronautical University students volunteer to help out on the compression check! All cy", "folder_name": "305_12-14-2023", "all_media": ["01.jpg"], "comments": ["Comments for https://www.instagram.com/p/C02x8Gkg3tw/", "Count: 1", "Reported by IG: 8", "Saved: 05/11/2026 1:56:44pm", "[12/15/2023 4:02:19pm] @jimjeffries4u · 1 likes"], "instagram_url": "https://www.instagram.com/p/C02x8Gkg3tw/"}, {"shortcode": "CXcYT6iAmXp", "author": "sav_a_dc3", "date": "12/13/2021 7:38:42pm", "likes": 93, "comments_count": 1, "caption": "Installing new engine cowling shock and vibration bumpers today. If anybody knows where we can find ", "folder_name": "199_12-13-2021", "all_media": ["01.jpg"], "comments": ["Comments for https://www.instagram.com/p/CXcYT6iAmXp/", "Count: 0", "Reported by IG: 1", "Saved: 05/11/2026 1:56:02pm", "Comments for https://www.instagram.com/p/CXcYT6iAmXp/"], "instagram_url": "https://www.instagram.com/p/CXcYT6iAmXp/"}, {"shortcode": "BrTLpRInKuQ", "author": "paymansam", "date": "12/12/2018 2:53:31pm", "likes": 74, "comments_count": 2, "caption": "Mark is using a iron to heat shrink the ceconite 101 fabric nice and tight over the metal framework ", "folder_name": "023_12-12-2018", "all_media": ["01.jpg", "02.jpg"], "comments": ["Comments for https://www.instagram.com/p/BrTLpRInKuQ/", "Count: 2", "Reported by IG: 2", "Saved: 05/11/2026 1:55:39pm", "[12/24/2018 1:01:33pm] @paymansam"], "instagram_url": "https://www.instagram.com/p/BrTLpRInKuQ/"}, {"shortcode": "BrQMutjnuJN", "author": "mrblackfoot", "date": "12/11/2018 11:05:17am", "likes": 236, "comments_count": 3, "caption": "Veteran and volunteer Mike McGuire preparing the gearbox to receive the first accessories! Starters ", "folder_name": "021_12-11-2018", "all_media": ["01.jpg", "02.jpg"], "comments": ["Comments for https://www.instagram.com/p/BrQMutjnuJN/", "Count: 4", "Reported by IG: 3", "Saved: 05/11/2026 1:55:39pm", "[03/30/2019 7:42:55pm] @mrblackfoot · 1 likes · 1 replies"], "instagram_url": "https://www.instagram.com/p/BrQMutjnuJN/"}, {"shortcode": "BrIs19snUXe", "author": "falcon440dm", "date": "12/08/2018 1:11:58pm", "likes": 1082, "comments_count": 13, "caption": "Our Mr. Douglas DC-3 sitting on the ramp at the  McDonnell Douglas Corporation, Santa Monica Califor", "folder_name": "019_12-08-2018", "all_media": ["01.jpg"], "comments": ["Comments for https://www.instagram.com/p/BrIs19snUXe/", "Count: 14", "Reported by IG: 13", "Saved: 05/11/2026 1:55:39pm", "[12/25/2018 12:40:49pm] @falcon440dm · 1 replies"], "instagram_url": "https://www.instagram.com/p/BrIs19snUXe/"}, {"shortcode": "B5vdWa6piDr", "author": "b_the_windcb2", "date": "12/06/2019 1:46:29pm", "likes": 32, "comments_count": 1, "caption": "Great Quality Mr. Douglas T-shirts are now available for Christmas! \nWe have Ladies V- necks\n$25 dol", "folder_name": "149_12-06-2019", "all_media": ["01.jpg"], "comments": ["Comments for https://www.instagram.com/p/B5vdWa6piDr/", "Count: 1", "Reported by IG: 1", "Saved: 05/11/2026 1:55:56pm", "[12/06/2019 5:22:03pm] @b_the_windcb2 · 1 likes"], "instagram_url": "https://www.instagram.com/p/B5vdWa6piDr/"}];
+console.log("Posts loaded:", allPosts.length);
+
+var allLogs = [];
+var failedImages = {};
+var loadedImages = {};
+var currentLightboxIndex = 0;
+var currentLightboxMedia = [];
+var selectedSrcs = new Set();
+var canvas = null;
+var storyboardImages = [];
+var PREVIEW_W = 1080;
+var PREVIEW_H = 1440;
+var TARGET_W = 10800;
+var TARGET_H = 14400;
+var SCALE = TARGET_W / PREVIEW_W;
+
+function addLog(msg, type) {
+    var timestamp = new Date().toLocaleTimeString();
+    var prefix = "";
+    var color = "#10b981";
+    if(type === "error") { prefix = "[ERROR] "; color = "#ef4444"; }
+    else if(type === "warning") { prefix = "[WARN] "; color = "#f59e0b"; }
+    else if(type === "success") { prefix = "[OK] "; color = "#10b981"; }
+    else { prefix = "[INFO] "; color = "#60a5fa"; }
+    var fullMsg = timestamp + " " + prefix + msg;
+    var logDiv = document.getElementById("debugLog");
+    if(logDiv) {
+        var entry = document.createElement("div");
+        entry.textContent = fullMsg;
+        entry.style.color = color;
+        logDiv.appendChild(entry);
+        entry.scrollIntoView();
+    }
+    console.log(fullMsg);
+    allLogs.push(fullMsg);
+    if(allLogs.length > 500) allLogs.shift();
+}
+
+function saveLogs() {
+    if(allLogs.length === 0) {
+        addLog("No logs to save", "warning");
+        return;
+    }
+    var logsText = allLogs.join("\n");
+    var blob = new Blob([logsText], {type: "text/plain"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "gallery_logs_" + new Date().toISOString().slice(0,19).replace(/:/g, "-") + ".txt";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    addLog("Saved " + allLogs.length + " logs", "success");
+}
+
+function showToast(msg, isError) {
+    var t = document.getElementById("toast");
+    if(t) {
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(function() { t.classList.remove("show"); }, 2000);
+    }
+    addLog(msg, isError ? "error" : "success");
+}
+
+function getMediaPath(folder, file) {
+    return folder + "/" + file;
+}
+
+function isVideo(filename) {
+    if(!filename) return false;
+    var ext = filename.toLowerCase();
+    return ext.endsWith(".mp4") || ext.endsWith(".mov") || ext.endsWith(".avi") || ext.endsWith(".mkv");
+}
+
+function openLightbox(mediaItems, startIndex, caption) {
+    currentLightboxMedia = mediaItems;
+    currentLightboxIndex = startIndex;
+    var captionDiv = document.getElementById("lightboxCaption");
+    if(captionDiv) captionDiv.textContent = caption || "";
+    showLightboxMedia(currentLightboxIndex);
+    var lightbox = document.getElementById("lightbox");
+    if(lightbox) lightbox.classList.add("active");
+    addLog("Lightbox opened", "info");
+}
+
+function showLightboxMedia(index) {
+    var container = document.getElementById("lightboxMediaContainer");
+    var media = currentLightboxMedia[index];
+    if(!media || !container) return;
+    container.innerHTML = "";
+    if(isVideo(media.url)) {
+        var video = document.createElement("video");
+        video.src = media.url;
+        video.controls = true;
+        video.style.maxWidth = "90vw";
+        video.style.maxHeight = "85vh";
+        video.className = "lightbox-media";
+        container.appendChild(video);
+    } else {
+        var img = document.createElement("img");
+        img.src = media.url;
+        img.style.maxWidth = "90vw";
+        img.style.maxHeight = "85vh";
+        img.className = "lightbox-media";
+        container.appendChild(img);
+    }
+}
+
+function closeLightbox() {
+    var lightbox = document.getElementById("lightbox");
+    if(lightbox) lightbox.classList.remove("active");
+    addLog("Lightbox closed", "info");
+}
+
+function prevLightbox() {
+    if(currentLightboxMedia.length === 0) return;
+    currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxMedia.length) % currentLightboxMedia.length;
+    showLightboxMedia(currentLightboxIndex);
+}
+
+function nextLightbox() {
+    if(currentLightboxMedia.length === 0) return;
+    currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxMedia.length;
+    showLightboxMedia(currentLightboxIndex);
+}
+
+function showComments(shortcode) {
+    addLog("Comments for: " + shortcode, "info");
+    var post = null;
+    for(var i=0;i<allPosts.length;i++) {
+        if(allPosts[i].shortcode === shortcode) {
+            post = allPosts[i];
+            break;
+        }
+    }
+    var commentsList = document.getElementById("commentsList");
+    if(!commentsList) return;
+    if(!post || !post.comments || post.comments.length === 0) {
+        commentsList.innerHTML = "<div style='text-align:center;padding:20px;'>No comments</div>";
+    } else {
+        var html = "";
+        for(var i=0;i<post.comments.length;i++) {
+            var safeComment = post.comments[i].replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            html += "<div class='comment-item'>💬 " + safeComment + "</div>";
+        }
+        commentsList.innerHTML = html;
+        addLog("Displayed " + post.comments.length + " comments", "success");
+    }
+    var modal = document.getElementById("commentsModal");
+    if(modal) modal.classList.add("active");
+}
+
+function trackImageLoad(img) {
+    var src = img.src;
+    if(!loadedImages[src]) {
+        loadedImages[src] = true;
+        delete failedImages[src];
+        addLog("Loaded: " + src.split('/').pop(), "success");
+        updateImageStatus();
+    }
+}
+
+function trackImageError(img) {
+    var src = img.src;
+    if(!failedImages[src]) {
+        failedImages[src] = true;
+        delete loadedImages[src];
+        addLog("FAILED: " + src.split('/').pop(), "error");
+        updateImageStatus();
+    }
+}
+
+function updateImageStatus() {
+    var total = Object.keys(failedImages).length + Object.keys(loadedImages).length;
+    var failedCount = Object.keys(failedImages).length;
+    var statusDiv = document.getElementById("imageStatusLog");
+    if(!statusDiv) return;
+    var html = '<div>📊 ' + total + ' total | <span style="color:#10b981">' + Object.keys(loadedImages).length + ' loaded</span> | <span style="color:#ef4444">' + failedCount + ' failed</span></div>';
+    if(failedCount > 0) {
+        var failList = Object.keys(failedImages).slice(0,3);
+        html += '<div style="color:#ef4444">Failed: ' + failList.map(function(s){return s.split('/').pop();}).join(', ') + (failedCount > 3 ? '...' : '') + '</div>';
+    }
+    statusDiv.innerHTML = html;
+}
+
+function renderGallery(posts) {
+    addLog("Rendering " + posts.length + " posts", "info");
+    var grid = document.getElementById("galleryGrid");
+    if(!grid) return;
+    if(!posts.length) {
+        grid.innerHTML = "<div style='text-align:center;padding:3rem;'>No posts match.</div>";
+        return;
+    }
+    var htmlStr = "";
+    for(var idx=0; idx<posts.length; idx++){
+        var post = posts[idx];
+        var firstMedia = post.all_media && post.all_media.length ? post.all_media[0] : null;
+        var mediaPath = firstMedia ? getMediaPath(post.folder_name, firstMedia) : "";
+        var isVideoPost = firstMedia && isVideo(firstMedia);
+        
+        var mediaArray = [];
+        if(post.all_media) {
+            for(var i=0;i<post.all_media.length;i++) {
+                mediaArray.push({
+                    url: getMediaPath(post.folder_name, post.all_media[i]),
+                    type: isVideo(post.all_media[i]) ? "video" : "image"
+                });
+            }
+        }
+        var mediaArrayJson = JSON.stringify(mediaArray).replace(/"/g, '&quot;');
+        
+        var mediaHtml = "";
+        if(firstMedia) {
+            if(isVideoPost) {
+                mediaHtml = "<div class='video-thumbnail'>";
+                mediaHtml += "<video preload='metadata' muted playsinline>";
+                mediaHtml += "<source src='" + mediaPath + "' type='video/mp4'>";
+                mediaHtml += "</video>";
+                mediaHtml += "<div class='play-overlay'>▶</div>";
+                mediaHtml += "</div>";
+            } else {
+                mediaHtml = "<img class='card-media' src='" + mediaPath + "' loading='lazy' onload='trackImageLoad(this)' onerror='trackImageError(this)'>";
+            }
+        } else {
+            mediaHtml = "<div class='card-media'>No media</div>";
+        }
+        
+        htmlStr += "<div class='card' data-shortcode='" + post.shortcode + "' data-media='" + mediaArrayJson + "' data-caption='" + (post.caption || "").replace(/"/g, '&quot;') + "'>";
+        htmlStr += "<div style='position:relative;width:100%;aspect-ratio:4/3;'>" + mediaHtml + "</div>";
+        htmlStr += "<div class='card-content'>";
+        htmlStr += "<div class='card-meta'><span class='author-name'>@" + post.author + "</span><span>📅 " + new Date(post.date).toLocaleDateString() + "</span><span>❤️ " + post.likes + "</span></div>";
+        if(post.caption) {
+            var shortCaption = post.caption.length > 120 ? post.caption.substring(0,120) + "..." : post.caption;
+            htmlStr += "<div class='card-caption'>" + shortCaption.replace(/</g, '&lt;').replace(/>/g, '&gt;') + "</div>";
+        }
+        htmlStr += "<div class='card-footer'>";
+        htmlStr += "<a href='" + post.instagram_url + "' target='_blank' class='insta-link' onclick='event.stopPropagation()'>🔗 Instagram</a>";
+        htmlStr += "<button class='comments-btn' data-shortcode='" + post.shortcode + "'>💬 " + (post.comments ? post.comments.length : 0) + "</button>";
+        htmlStr += "</div></div></div>";
+    }
+    grid.innerHTML = htmlStr;
+    
+    document.querySelectorAll(".card").forEach(function(card) {
+        card.onclick = function(e) {
+            if(e.target.closest(".comments-btn") || e.target.closest(".select-checkbox") || e.target.closest(".insta-link")) {
+                return;
+            }
+            var mediaData = JSON.parse(this.dataset.media);
+            if(mediaData && mediaData.length) {
+                openLightbox(mediaData, 0, this.dataset.caption);
+            }
+        };
+    });
+    
+    document.querySelectorAll(".comments-btn").forEach(function(btn) {
+        btn.onclick = function(e) {
+            e.stopPropagation();
+            showComments(this.dataset.shortcode);
+        };
+    });
+    
+    addCheckboxesToCards();
+}
+
+function addCheckboxesToCards() {
+    var cards = document.querySelectorAll(".card");
+    addLog("Adding checkboxes to " + cards.length + " cards", "info");
+    for(var i=0;i<cards.length;i++){
+        if(cards[i].querySelector(".select-checkbox")) continue;
+        var img = cards[i].querySelector("img");
+        if(!img || !img.src) continue;
+        var chk = document.createElement("input");
+        chk.type = "checkbox";
+        chk.className = "select-checkbox";
+        chk.dataset.src = img.src;
+        chk.onclick = function(e) { e.stopPropagation(); };
+        chk.onchange = function(e) {
+            e.stopPropagation();
+            var src = this.dataset.src;
+            if(this.checked){
+                if(!selectedSrcs.has(src)) {
+                    selectedSrcs.add(src);
+                    addImageToStoryboard(src);
+                }
+            } else {
+                selectedSrcs.delete(src);
+            }
+            var countSpan = document.getElementById("selectedCount");
+            if(countSpan) countSpan.innerText = selectedSrcs.size + " selected";
+        };
+        cards[i].style.position = "relative";
+        cards[i].appendChild(chk);
+    }
+}
+
+function selectAll() {
+    document.querySelectorAll(".select-checkbox").forEach(function(cb) {
+        if(!cb.checked) cb.click();
+    });
+    addLog("Selected all", "success");
+}
+
+function deselectAll() {
+    document.querySelectorAll(".select-checkbox").forEach(function(cb) {
+        if(cb.checked) cb.click();
+    });
+    addLog("Deselected all", "info");
+}
+
+function showMissingImages() {
+    var failed = Object.keys(failedImages);
+    if(failed.length === 0) {
+        showToast("All images loaded!", false);
+    } else {
+        showToast(failed.length + " images failed", true);
+        for(var i=0;i<failed.length;i++) addLog(failed[i], "error");
+    }
+}
+
+function initCanvas() {
+    var canvasEl = document.getElementById("storyboardCanvas");
+    if(!canvasEl) { addLog("Canvas not found", "error"); return; }
+    if(canvas) canvas.dispose();
+    canvas = new fabric.Canvas("storyboardCanvas");
+    canvas.setDimensions({ width: PREVIEW_W, height: PREVIEW_H });
+    canvas.backgroundColor = "#ffffff";
+    canvas.renderAll();
+    addLog("Canvas ready", "success");
+}
+
+function addImageToStoryboard(src) {
+    var filename = src.split('/').pop();
+    for(var i=0;i<storyboardImages.length;i++){
+        if(storyboardImages[i].src === src){ showToast("Already added", true); return; }
+    }
+    fabric.Image.fromURL(src, function(img) {
+        if(!img) { addLog("Failed: " + filename, "error"); return; }
+        img.set({ hasControls: true, hasBorders: true, lockRotation: true });
+        var margin = 20;
+        var x = margin + (storyboardImages.length % 3) * 280;
+        var y = margin + Math.floor(storyboardImages.length / 3) * 220;
+        img.set({ left: x, top: y });
+        storyboardImages.push({ src: src, fabricObj: img });
+        canvas.add(img);
+        canvas.renderAll();
+        updateThumbnails();
+        updateStoryboardBadge();
+        showToast("Added: " + filename, false);
+    });
+}
+
+function updateStoryboardBadge() {
+    var b = document.getElementById("storyboardCountBadge");
+    if(b) b.innerText = storyboardImages.length;
+}
+
+function updateThumbnails() {
+    var container = document.getElementById("storyboardThumbnails");
+    if(!container) return;
+    var html = "";
+    for(var i=0;i<storyboardImages.length;i++){
+        html += "<img class='storyboard-thumb' src='" + storyboardImages[i].src + "' data-index='" + i + "'>";
+    }
+    container.innerHTML = html;
+    document.querySelectorAll(".storyboard-thumb").forEach(function(thumb) {
+        thumb.onclick = function(e) {
+            e.stopPropagation();
+            var idx = parseInt(this.dataset.index);
+            canvas.remove(storyboardImages[idx].fabricObj);
+            storyboardImages.splice(idx,1);
+            canvas.renderAll();
+            updateThumbnails();
+            updateStoryboardBadge();
+        };
+    });
+}
+
+function applyLayout() {
+    if(storyboardImages.length === 0) return;
+    var tpl = document.getElementById("templateSelect").value;
+    var margin = 20;
+    var availW = PREVIEW_W - margin * 2;
+    if(tpl === "grid") {
+        var cols = Math.min(3, storyboardImages.length);
+        var cellW = (availW - (cols-1)*margin) / cols;
+        var y = margin;
+        for(var i=0;i<storyboardImages.length;i++){
+            var obj = storyboardImages[i].fabricObj;
+            var col = i % cols;
+            var scale = Math.min(cellW / obj.width, 250 / obj.height);
+            obj.scale(scale);
+            obj.set({ left: margin + col * (cellW + margin), top: y });
+            if(col === cols-1 || i === storyboardImages.length-1) y += obj.height * scale + margin;
+        }
+    } else if(tpl === "center" && storyboardImages.length > 0) {
+        var obj = storyboardImages[0].fabricObj;
+        var scale = Math.min(availW / obj.width, (PREVIEW_H - margin*2) / obj.height);
+        obj.scale(scale);
+        obj.set({ left: margin + (availW - obj.width*scale)/2, top: margin + ((PREVIEW_H-margin*2) - obj.height*scale)/2 });
+    } else if(tpl === "masonry") {
+        var cols = 2;
+        var colWidth = availW / cols;
+        var colHeights = [margin, margin];
+        var colX = [margin, margin + colWidth + margin];
+        for(var i=0;i<storyboardImages.length;i++){
+            var obj = storyboardImages[i].fabricObj;
+            var colIdx = colHeights[0] <= colHeights[1] ? 0 : 1;
+            var scale = colWidth / obj.width;
+            obj.scale(scale);
+            obj.set({ left: colX[colIdx], top: colHeights[colIdx] });
+            colHeights[colIdx] += obj.height * scale + margin;
+        }
+    }
+    canvas.renderAll();
+    addLog("Layout: " + tpl, "success");
+}
+
+function syncSelectedToStoryboard() {
+    var srcs = Array.from(selectedSrcs);
+    if(srcs.length === 0){ showToast("No images selected", true); return; }
+    addLog("Syncing " + srcs.length + " images", "info");
+    for(var i=0;i<srcs.length;i++) addImageToStoryboard(srcs[i]);
+}
+
+function clearAll() {
+    if(confirm("Clear all?")){
+        for(var i=0;i<storyboardImages.length;i++) canvas.remove(storyboardImages[i].fabricObj);
+        storyboardImages = [];
+        canvas.renderAll();
+        updateThumbnails();
+        updateStoryboardBadge();
+        showToast("Cleared", false);
+    }
+}
+
+function exportHighQuality() {
+    if(storyboardImages.length === 0){ showToast("No images", true); return; }
+    addLog("Exporting 300 DPI...", "info");
+    showToast("Exporting...", false);
+    var offCanvas = document.createElement("canvas");
+    offCanvas.width = TARGET_W;
+    offCanvas.height = TARGET_H;
+    var offCtx = offCanvas.getContext("2d");
+    offCtx.fillStyle = canvas.backgroundColor;
+    offCtx.fillRect(0, 0, TARGET_W, TARGET_H);
+    offCtx.imageSmoothingEnabled = true;
+    offCtx.imageSmoothingQuality = "high";
+    for(var i=0;i<storyboardImages.length;i++){
+        var obj = storyboardImages[i].fabricObj;
+        var left = obj.left * SCALE;
+        var top = obj.top * SCALE;
+        var width = obj.width * obj.scaleX * SCALE;
+        var height = obj.height * obj.scaleY * SCALE;
+        offCtx.drawImage(obj._element, left, top, width, height);
+    }
+    var a = document.createElement("a");
+    a.download = "storyboard_300dpi.png";
+    a.href = offCanvas.toDataURL("image/png");
+    a.click();
+    addLog("Export complete", "success");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    addLog("DOM ready", "info");
+    
+    document.getElementById("selectAllBtn").onclick = selectAll;
+    document.getElementById("deselectAllBtn").onclick = deselectAll;
+    document.getElementById("syncSelectedBtn").onclick = syncSelectedToStoryboard;
+    document.getElementById("checkMissingBtn").onclick = showMissingImages;
+    document.getElementById("debugSaveBtn").onclick = saveLogs;
+    document.getElementById("debugCloseBtn").onclick = function(){ document.getElementById("debugPanel").style.display = "none"; };
+    document.getElementById("openStoryboardBtn").onclick = function(){ document.getElementById("storyboardModal").classList.add("active"); };
+    document.getElementById("closeStoryboardBtn").onclick = function(){ document.getElementById("storyboardModal").classList.remove("active"); };
+    document.getElementById("exportStoryboardBtn").onclick = exportHighQuality;
+    document.getElementById("clearStoryboardBtn").onclick = clearAll;
+    document.getElementById("applyTemplateBtn").onclick = applyLayout;
+    document.getElementById("lightboxCloseBtn").onclick = closeLightbox;
+    document.querySelector(".lightbox-prev").onclick = prevLightbox;
+    document.querySelector(".lightbox-next").onclick = nextLightbox;
+    document.getElementById("lightbox").onclick = function(e) { if(e.target === this) closeLightbox(); };
+    document.getElementById("commentsModalClose").onclick = function() { document.getElementById("commentsModal").classList.remove("active"); };
+    document.getElementById("commentsModal").onclick = function(e) { if(e.target === this) this.classList.remove("active"); };
+    
+    document.getElementById("searchInput").addEventListener("input", function(e){
+        var q = e.target.value.toLowerCase();
+        var filtered = allPosts.filter(function(p){ return (p.caption || "").toLowerCase().indexOf(q) !== -1; });
+        renderGallery(filtered);
+    });
+    
+    document.addEventListener("keydown", function(e) {
+        var lightbox = document.getElementById("lightbox");
+        if(lightbox && lightbox.classList.contains("active")) {
+            if(e.key === "ArrowLeft") prevLightbox();
+            else if(e.key === "ArrowRight") nextLightbox();
+            else if(e.key === "Escape") closeLightbox();
+        }
+    });
+    
+    initCanvas();
+    renderGallery(allPosts);
+    addLog("=== GALLERY v0034 READY ===", "success");
+    addLog("Loaded " + allPosts.length + " posts", "info");
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+=== Flight Simulator Diagnostic Report ===
+Timestamp: 2026-05-12T11:56:50.798396
+
+Page loaded: True
+Airplane loaded: unknown
+Terrain loaded: unknown

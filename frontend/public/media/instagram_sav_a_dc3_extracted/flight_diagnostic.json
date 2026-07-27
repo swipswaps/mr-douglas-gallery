@@ -1,0 +1,50 @@
+{
+  "url": "http://localhost:8000/flying_game_airport_fixed.html",
+  "console": [
+    {
+      "type": "log",
+      "text": "Animation started \u2013 use arrow keys and Q/E"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: CONTEXT_LOST_WEBGL: loseContext: context lost"
+    },
+    {
+      "type": "log",
+      "text": "THREE.WebGLRenderer: Context Lost."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)"
+    },
+    {
+      "type": "log",
+      "text": "THREE.WebGLRenderer: Context Restored."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0xf9c00124e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0xf9c00124e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0xf9c00124e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0xf9c00124e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "type": "log",
+      "text": "Aircraft loaded and orientation corrected"
+    }
+  ],
+  "network": [],
+  "airplane_exists": false,
+  "terrain_exists": false,
+  "page_loaded": true,
+  "screenshot": "flight_diagnostic.png"
+}
