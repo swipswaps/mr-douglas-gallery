@@ -1,0 +1,205 @@
+2026-05-13 14:39:29,096 - INFO - Loading from instagram_posts.db
+2026-05-13 14:39:29,284 - DEBUG - Folder 027_12-31-2018: found 1 media files
+2026-05-13 14:39:29,467 - DEBUG - Folder 151_12-30-2019: found 1 media files
+2026-05-13 14:39:29,653 - DEBUG - Folder 025_12-17-2018: found 3 media files
+2026-05-13 14:39:30,248 - DEBUG - Folder 165_12-16-2020: found 1 media files
+2026-05-13 14:39:30,461 - DEBUG - Folder 305_12-14-2023: found 1 media files
+2026-05-13 14:39:30,649 - DEBUG - Folder 199_12-13-2021: found 1 media files
+2026-05-13 14:39:30,879 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:30,883 - DEBUG - Folder 023_12-12-2018: found 2 media files
+2026-05-13 14:39:31,324 - DEBUG - Folder 021_12-11-2018: found 2 media files
+2026-05-13 14:39:31,931 - DEBUG - Folder 019_12-08-2018: found 1 media files
+2026-05-13 14:39:32,199 - DEBUG - Folder 149_12-06-2019: found 1 media files
+2026-05-13 14:39:32,442 - DEBUG - Folder 197_12-04-2021: found 2 media files
+2026-05-13 14:39:32,927 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:32,930 - DEBUG - Folder 017_12-04-2018: found 1 media files
+2026-05-13 14:39:33,186 - DEBUG - Folder 303_12-03-2023: found 3 media files
+2026-05-13 14:39:33,981 - DEBUG - Folder 195_12-02-2021: found 1 media files
+2026-05-13 14:39:34,211 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:34,214 - DEBUG - Folder 015_12-02-2018: found 3 media files
+2026-05-13 14:39:35,001 - DEBUG - Folder 193_12-01-2021: found 3 media files
+2026-05-13 14:39:35,629 - DEBUG - Folder 013_12-01-2018: found 1 media files
+2026-05-13 14:39:35,797 - DEBUG - Folder 011_11-28-2018: found 1 media files
+2026-05-13 14:39:35,973 - DEBUG - Folder 009_11-27-2018: found 1 media files
+2026-05-13 14:39:36,118 - DEBUG - Folder 007_11-26-2018: found 1 media files
+2026-05-13 14:39:36,259 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:36,264 - DEBUG - Folder 301_11-22-2023_reel: found 1 media files
+2026-05-13 14:39:36,482 - DEBUG - Folder 299_11-21-2023: found 1 media files
+2026-05-13 14:39:36,626 - DEBUG - Folder 191_11-21-2021: found 1 media files
+2026-05-13 14:39:36,746 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:36,749 - DEBUG - Folder 005_11-20-2018: found 1 media files
+2026-05-13 14:39:36,893 - DEBUG - Folder 259_11-19-2022: found 1 media files
+2026-05-13 14:39:37,037 - DEBUG - Folder 003_11-19-2018: found 10 media files
+2026-05-13 14:39:38,398 - DEBUG - Folder 257_11-18-2022: found 2 media files
+2026-05-13 14:39:38,708 - DEBUG - Folder 001_11-18-2018: found 1 media files
+2026-05-13 14:39:38,869 - DEBUG - Folder 255_11-17-2022: found 6 media files
+2026-05-13 14:39:39,721 - DEBUG - Folder 297_11-11-2023: found 2 media files
+2026-05-13 14:39:40,037 - DEBUG - Folder 147_11-10-2019: found 1 media files
+2026-05-13 14:39:40,167 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:40,171 - DEBUG - Folder 189_11-09-2021: found 3 media files
+2026-05-13 14:39:40,668 - DEBUG - Folder 253_11-08-2022_reel: found 1 media files
+2026-05-13 14:39:40,853 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:40,856 - DEBUG - Folder 295_11-06-2023: found 1 media files
+2026-05-13 14:39:41,008 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:41,012 - DEBUG - Folder 145_11-06-2019: found 1 media files
+2026-05-13 14:39:41,166 - DEBUG - Folder 143_11-04-2019: found 3 media files
+2026-05-13 14:39:41,686 - DEBUG - Folder 293_11-03-2023: found 3 media files
+2026-05-13 14:39:42,173 - DEBUG - Folder 291_11-02-2023: found 2 media files
+2026-05-13 14:39:42,473 - DEBUG - Folder 141_10-28-2019: found 2 media files
+2026-05-13 14:39:42,747 - DEBUG - Folder 289_10-26-2023: found 1 media files
+2026-05-13 14:39:42,880 - DEBUG - Folder 139_10-25-2019: found 1 media files
+2026-05-13 14:39:43,014 - DEBUG - Folder 251_10-22-2022: found 3 media files
+2026-05-13 14:39:43,468 - DEBUG - Folder 137_10-22-2019: found 1 media files
+2026-05-13 14:39:43,623 - DEBUG - Folder 135_10-21-2019: found 4 media files
+2026-05-13 14:39:44,287 - DEBUG - Folder 187_10-13-2021: found 1 media files
+2026-05-13 14:39:44,430 - DEBUG - Folder 185_10-11-2021: found 1 media files
+2026-05-13 14:39:44,631 - DEBUG - Folder 133_10-07-2019: found 1 media files
+2026-05-13 14:39:44,783 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:44,787 - DEBUG - Folder 249_09-30-2022_reel: found 1 media files
+2026-05-13 14:39:44,952 - DEBUG - Folder 131_09-25-2019: found 1 media files
+2026-05-13 14:39:45,120 - DEBUG - Folder 183_09-23-2021: found 1 media files
+2026-05-13 14:39:45,284 - DEBUG - Folder 181_09-16-2021: found 2 media files
+2026-05-13 14:39:45,594 - DEBUG - Folder 129_09-14-2019: found 2 media files
+2026-05-13 14:39:45,936 - DEBUG - Folder 127_09-13-2019: found 4 media files
+2026-05-13 14:39:46,558 - DEBUG - Folder 125_09-11-2019: found 1 media files
+2026-05-13 14:39:46,747 - DEBUG - Folder 287_09-05-2023: found 3 media files
+2026-05-13 14:39:47,210 - DEBUG - Folder 179_09-05-2021: found 1 media files
+2026-05-13 14:39:47,354 - DEBUG - Folder 123_09-02-2019: found 1 media files
+2026-05-13 14:39:47,523 - DEBUG - Folder 121_08-29-2019: found 2 media files
+2026-05-13 14:39:47,827 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:47,831 - DEBUG - Folder 325_08-26-2024_reel: found 1 media files
+2026-05-13 14:39:47,985 - DEBUG - Folder 247_08-25-2022: found 1 media files
+2026-05-13 14:39:48,153 - DEBUG - Folder 323_08-22-2024: found 1 media files
+2026-05-13 14:39:48,286 - DEBUG - Folder 245_08-15-2022: found 1 media files
+2026-05-13 14:39:48,429 - DEBUG - Folder 119_08-15-2019: found 1 media files
+2026-05-13 14:39:48,594 - DEBUG - Folder 177_08-10-2021: found 1 media files
+2026-05-13 14:39:48,729 - DEBUG - Folder 117_07-30-2019: found 5 media files
+2026-05-13 14:39:49,366 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:49,369 - DEBUG - Folder 243_07-27-2022: found 1 media files
+2026-05-13 14:39:49,537 - DEBUG - Folder 241_07-21-2022: found 1 media files
+2026-05-13 14:39:49,712 - DEBUG - Folder 321_07-18-2024: found 1 media files
+2026-05-13 14:39:49,857 - DEBUG - Folder 115_07-18-2019: found 1 media files
+2026-05-13 14:39:49,997 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:50,000 - DEBUG - Folder 285_07-15-2023: found 3 media files
+2026-05-13 14:39:50,474 - DEBUG - Folder 113_07-14-2019: found 3 media files
+2026-05-13 14:39:51,342 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:51,345 - DEBUG - Folder 111_07-11-2019: found 3 media files
+2026-05-13 14:39:54,014 - DEBUG - Folder 283_07-07-2023: found 1 media files
+2026-05-13 14:39:54,306 - DEBUG - Folder 109_06-30-2019: found 4 media files
+2026-05-13 14:39:55,278 - DEBUG - Folder 281_06-29-2023: found 1 media files
+2026-05-13 14:39:55,523 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:55,527 - DEBUG - Folder 107_06-29-2019: found 1 media files
+2026-05-13 14:39:55,900 - DEBUG - Folder 175_06-27-2021: found 1 media files
+2026-05-13 14:39:56,126 - DEBUG - Folder 105_06-26-2019: found 3 media files
+2026-05-13 14:39:56,930 - DEBUG - Folder 319_06-25-2024: found 1 media files
+2026-05-13 14:39:57,173 - DEBUG - Folder 103_06-25-2019: found 2 media files
+2026-05-13 14:39:57,450 - DEBUG - Folder 101_06-24-2019: found 3 media files
+2026-05-13 14:39:57,906 - DEBUG - Folder 317_06-21-2024: found 1 media files
+2026-05-13 14:39:58,061 - DEBUG - Folder 099_06-20-2019: found 1 media files
+2026-05-13 14:39:58,214 - DEBUG - Folder 315_06-18-2024: found 2 media files
+2026-05-13 14:39:58,513 - DEBUG - Folder 163_06-15-2020: found 4 media files
+2026-05-13 14:39:59,233 - DEBUG - Folder 097_06-14-2019: found 1 media files
+2026-05-13 14:39:59,440 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:39:59,445 - DEBUG - Folder 095_06-13-2019: found 6 media files
+2026-05-13 14:40:00,418 - DEBUG - Folder 279_06-11-2023: found 1 media files
+2026-05-13 14:40:00,591 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:00,595 - DEBUG - Folder 093_06-11-2019: found 1 media files
+2026-05-13 14:40:00,739 - DEBUG - Folder 277_06-09-2023_reel: found 1 media files
+2026-05-13 14:40:00,883 - DEBUG - Folder 091_06-09-2019: found 1 media files
+2026-05-13 14:40:01,015 - DEBUG - Folder 089_06-07-2019: found 1 media files
+2026-05-13 14:40:01,193 - DEBUG - Folder 239_06-05-2022: found 3 media files
+2026-05-13 14:40:01,803 - DEBUG - Folder 329_06-02-2025_reel: found 1 media files
+2026-05-13 14:40:01,923 - DEBUG - Folder 087_05-30-2019: found 3 media files
+2026-05-13 14:40:02,299 - DEBUG - Folder 275_05-28-2023: found 1 media files
+2026-05-13 14:40:02,454 - DEBUG - Folder 237_05-27-2022: found 2 media files
+2026-05-13 14:40:02,720 - DEBUG - Folder 235_05-23-2022: found 2 media files
+2026-05-13 14:40:03,083 - DEBUG - Folder 085_05-22-2019: found 1 media files
+2026-05-13 14:40:03,250 - DEBUG - Folder 083_05-21-2019: found 3 media files
+2026-05-13 14:40:03,804 - DEBUG - Folder 233_05-17-2022: found 1 media files
+2026-05-13 14:40:03,978 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:03,982 - DEBUG - Folder 081_05-16-2019: found 3 media files
+2026-05-13 14:40:04,535 - DEBUG - Folder 231_05-15-2022: found 1 media files
+2026-05-13 14:40:04,702 - DEBUG - Folder 229_05-12-2022: found 1 media files
+2026-05-13 14:40:04,864 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:04,867 - DEBUG - Folder 079_05-12-2019: found 1 media files
+2026-05-13 14:40:05,044 - DEBUG - Folder 077_05-08-2019: found 6 media files
+2026-05-13 14:40:05,920 - DEBUG - Folder 075_05-03-2019: found 1 media files
+2026-05-13 14:40:06,076 - DEBUG - Folder 073_05-02-2019: found 6 media files
+2026-05-13 14:40:07,038 - DEBUG - Folder 173_04-30-2021: found 4 media files
+2026-05-13 14:40:07,698 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:07,703 - DEBUG - Folder 071_04-30-2019: found 1 media files
+2026-05-13 14:40:07,889 - DEBUG - Folder 171_04-29-2021: found 1 media files
+2026-05-13 14:40:08,055 - DEBUG - Folder 069_04-29-2019: found 1 media files
+2026-05-13 14:40:08,243 - DEBUG - Folder 227_04-28-2022: found 3 media files
+2026-05-13 14:40:08,728 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:08,730 - DEBUG - Folder 169_04-27-2021: found 1 media files
+2026-05-13 14:40:08,897 - DEBUG - Folder 161_04-27-2020: found 1 media files
+2026-05-13 14:40:09,028 - DEBUG - Folder 343_04-24-2026_reel: found 1 media files
+2026-05-13 14:40:09,159 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:09,165 - DEBUG - Folder 341_04-23-2026: found 1 media files
+2026-05-13 14:40:09,296 - DEBUG - Folder 225_04-18-2022: found 1 media files
+2026-05-13 14:40:09,462 - DEBUG - Folder 223_04-16-2022: found 1 media files
+2026-05-13 14:40:09,594 - DEBUG - Folder 067_04-12-2019: found 1 media files
+2026-05-13 14:40:09,804 - DEBUG - Folder 339_04-09-2026: found 1 media files
+2026-05-13 14:40:09,993 - DEBUG - Folder 221_04-09-2022_reel: found 1 media files
+2026-05-13 14:40:10,171 - DEBUG - Folder 337_04-07-2026: found 20 media files
+2026-05-13 14:40:13,568 - DEBUG - Folder 313_04-06-2024: found 1 media files
+2026-05-13 14:40:13,726 - DEBUG - Folder 065_04-06-2019: found 1 media files
+2026-05-13 14:40:13,958 - DEBUG - Folder 311_04-02-2024: found 1 media files
+2026-05-13 14:40:14,221 - DEBUG - Folder 159_03-31-2020: found 1 media files
+2026-05-13 14:40:14,376 - DEBUG - Folder 219_03-29-2022: found 1 media files
+2026-05-13 14:40:14,517 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:14,522 - DEBUG - Folder 063_03-29-2019: found 1 media files
+2026-05-13 14:40:14,686 - DEBUG - Folder 217_03-26-2022: found 2 media files
+2026-05-13 14:40:15,074 - DEBUG - Folder 061_03-25-2019: found 1 media files
+2026-05-13 14:40:15,304 - DEBUG - Folder 059_03-21-2019: found 1 media files
+2026-05-13 14:40:15,506 - DEBUG - Folder 309_03-20-2024: found 1 media files
+2026-05-13 14:40:15,717 - DEBUG - Folder 157_03-10-2020: found 1 media files
+2026-05-13 14:40:15,917 - DEBUG - Folder 215_03-08-2022: found 2 media files
+2026-05-13 14:40:16,269 - DEBUG - Folder 057_03-08-2019: found 1 media files
+2026-05-13 14:40:16,470 - DEBUG - Folder 307_03-06-2024: found 1 media files
+2026-05-13 14:40:16,647 - DEBUG - Folder 155_03-06-2020: found 5 media files
+2026-05-13 14:40:17,598 - DEBUG - Folder 055_03-06-2019: found 1 media files
+2026-05-13 14:40:17,786 - DEBUG - Folder 273_03-05-2023: found 2 media files
+2026-05-13 14:40:18,151 - DEBUG - Folder 213_03-04-2022: found 2 media files
+2026-05-13 14:40:18,527 - DEBUG - Folder 053_03-04-2019: found 1 media files
+2026-05-13 14:40:18,684 - DEBUG - Folder 051_03-04-2019: found 1 media files
+2026-05-13 14:40:18,858 - DEBUG - Folder 153_03-02-2020: found 4 media files
+2026-05-13 14:40:19,635 - DEBUG - Folder 049_03-02-2019: found 1 media files
+2026-05-13 14:40:19,824 - DEBUG - Folder 271_02-25-2023: found 1 media files
+2026-05-13 14:40:20,022 - DEBUG - Folder 047_02-25-2019: found 1 media files
+2026-05-13 14:40:20,211 - DEBUG - Folder 045_02-25-2019: found 1 media files
+2026-05-13 14:40:20,409 - DEBUG - Folder 043_02-23-2019: found 1 media files
+2026-05-13 14:40:20,609 - DEBUG - Folder 211_02-22-2022: found 1 media files
+2026-05-13 14:40:20,799 - DEBUG - Folder 041_02-20-2019: found 1 media files
+2026-05-13 14:40:21,163 - DEBUG - Folder 039_02-18-2019: found 1 media files
+2026-05-13 14:40:21,438 - DEBUG - Folder 335_02-17-2026_reel: found 1 media files
+2026-05-13 14:40:21,650 - DEBUG - Folder 333_02-13-2026: found 1 media files
+2026-05-13 14:40:21,915 - DEBUG - Folder 037_02-10-2019: found 1 media files
+2026-05-13 14:40:22,084 - DEBUG - Folder 269_02-07-2023: found 1 media files
+2026-05-13 14:40:22,281 - DEBUG - Folder 035_02-06-2019: found 1 media files
+2026-05-13 14:40:22,480 - DEBUG - Folder 327_02-03-2025: found 1 media files
+2026-05-13 14:40:22,680 - DEBUG - Folder 209_02-03-2022: found 1 media files
+2026-05-13 14:40:22,864 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:22,869 - DEBUG - Folder 207_02-01-2022: found 1 media files
+2026-05-13 14:40:23,086 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:23,089 - DEBUG - Folder 033_02-01-2019: found 1 media files
+2026-05-13 14:40:23,289 - DEBUG - Folder 267_01-28-2023: found 1 media files
+2026-05-13 14:40:23,495 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:23,499 - DEBUG - Folder 265_01-24-2023: found 1 media files
+2026-05-13 14:40:23,687 - DEBUG - Folder 031_01-24-2019: found 1 media files
+2026-05-13 14:40:23,872 - WARNING - No author found in comments, using fallback: sav_a_dc3
+2026-05-13 14:40:23,876 - DEBUG - Folder 205_01-23-2022: found 4 media files
+2026-05-13 14:40:26,067 - DEBUG - Folder 263_01-22-2023: found 1 media files
+2026-05-13 14:40:26,200 - DEBUG - Folder 029_01-21-2019: found 1 media files
+2026-05-13 14:40:26,321 - DEBUG - Folder 331_01-13-2026: found 1 media files
+2026-05-13 14:40:26,465 - DEBUG - Folder 261_01-13-2023_reel: found 1 media files
+2026-05-13 14:40:26,609 - DEBUG - Folder 203_01-13-2022: found 1 media files
+2026-05-13 14:40:26,786 - DEBUG - Folder 201_01-03-2022: found 3 media files
+2026-05-13 14:40:27,185 - DEBUG - Folder 167_01-01-2021: found 1 media files
+2026-05-13 14:40:27,315 - INFO - Loaded 172 posts from DB
+2026-05-13 14:40:29,783 - INFO - Added 16 historic images from timeline/
+2026-05-13 14:40:30,013 - INFO - Saved posts_with_authors.json
+2026-05-13 14:40:30,563 - INFO - Generated /home/owner/Documents/mrdouglas.org/instagram_sav_a_dc3_extracted/index_v0010.html
+2026-05-13 14:40:30,779 - INFO - Total posts: 188
+2026-05-13 14:40:30,780 - INFO - Author display mode: username

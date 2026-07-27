@@ -1,0 +1,263 @@
+#!/usr/bin/env python3
+"""
+Generate working flight simulator with airport terrain (texture, no heavy STL).
+"""
+
+import argparse
+from pathlib import Path
+
+def generate_html(model_path='models/scene.gltf'):
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Douglas – DeLand Airport Flight</title>
+    <style>
+        body {{ margin: 0; overflow: hidden; font-family: 'Segoe UI', monospace; }}
+        #info {{ position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.7); color: white; padding: 8px 15px; border-radius: 8px; pointer-events: none; z-index: 10; }}
+        .controls {{ position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.6); color: #ccc; padding: 8px 12px; border-radius: 8px; pointer-events: none; z-index: 10; font-family: monospace; font-size: 12px; }}
+    </style>
+</head>
+<body>
+    <div id="info">✈️ Mr. Douglas – DeLand Airport</div>
+    <div class="controls">↑↓ pitch | ←→ roll | Q/E throttle | R reset | P physics (toggle) | Camera follows plane</div>
+
+    <script type="importmap">
+        {{
+            "imports": {{
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }}
+        }}
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import {{ GLTFLoader }} from 'three/addons/loaders/GLTFLoader.js';
+
+        // --- Scene setup ---
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x87CEEB);
+        scene.fog = new THREE.Fog(0x87CEEB, 400, 1000);
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(0, 4, 8);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({{ antialias: true }});
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.body.appendChild(renderer.domElement);
+        // Focus canvas for keyboard
+        renderer.domElement.tabIndex = 0;
+        renderer.domElement.focus();
+        renderer.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // --- Lighting ---
+        const ambient = new THREE.AmbientLight(0x606070);
+        scene.add(ambient);
+        const sun = new THREE.DirectionalLight(0xfff5d1, 1.2);
+        sun.position.set(50, 100, 30);
+        sun.castShadow = true;
+        sun.shadow.mapSize.width = 1024;
+        sun.shadow.mapSize.height = 1024;
+        scene.add(sun);
+        const fill = new THREE.DirectionalLight(0x88aaff, 0.6);
+        fill.position.set(-30, 20, -30);
+        scene.add(fill);
+
+        // --- Airport terrain: procedural ground with runway texture ---
+        // Create a canvas texture with grass and runway
+        const canvas = document.createElement('canvas');
+        canvas.width = 1024;
+        canvas.height = 1024;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#3c9e3c'; // grass
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Runway: light grey rectangle
+        ctx.fillStyle = '#888888';
+        ctx.fillRect(canvas.width * 0.35, canvas.height * 0.45, canvas.width * 0.3, canvas.height * 0.1);
+        // Runway markings (white lines)
+        ctx.fillStyle = '#ffffff';
+        for (let i = 0; i < 6; i++) {{
+            ctx.fillRect(canvas.width * 0.45, canvas.height * (0.47 + i * 0.01), canvas.width * 0.1, canvas.height * 0.005);
+        }}
+        // Taxiway edge (simple stripe)
+        ctx.fillStyle = '#aaaaaa';
+        ctx.fillRect(canvas.width * 0.32, canvas.height * 0.44, canvas.width * 0.36, 4);
+        ctx.fillRect(canvas.width * 0.32, canvas.height * 0.56, canvas.width * 0.36, 4);
+        const groundTexture = new THREE.CanvasTexture(canvas);
+        groundTexture.wrapS = THREE.RepeatWrapping;
+        groundTexture.wrapT = THREE.RepeatWrapping;
+        groundTexture.repeat.set(8, 8);
+
+        const groundPlane = new THREE.Mesh(
+            new THREE.PlaneGeometry(800, 800),
+            new THREE.MeshStandardMaterial({{ map: groundTexture, roughness: 0.8, metalness: 0.1 }})
+        );
+        groundPlane.rotation.x = -Math.PI / 2;
+        groundPlane.position.y = -2;
+        groundPlane.receiveShadow = true;
+        scene.add(groundPlane);
+
+        // Add a grid for reference
+        const grid = new THREE.GridHelper(800, 40, 0x88aaff, 0x335588);
+        grid.position.y = -1.8;
+        scene.add(grid);
+
+        // --- Airplane model (no rotation correction – already level) ---
+        let airplane = null;
+        let propellers = [];
+        let physicsEnabled = true;
+        const loader = new GLTFLoader();
+        loader.load('{model_path}',
+            (gltf) => {{
+                airplane = gltf.scene;
+                airplane.traverse((child) => {{
+                    if (child.isMesh) {{
+                        child.castShadow = true;
+                        child.receiveShadow = true;
+                        if (child.name.toLowerCase().includes('prop')) propellers.push(child);
+                    }}
+                }});
+                airplane.scale.set(0.5, 0.5, 0.5);
+                scene.add(airplane);
+                console.log('Aircraft loaded – orientation correct');
+                window.airplane = airplane; // for console inspection
+            }},
+            undefined,
+            (err) => console.error('Model load error:', err)
+        );
+
+        // --- Flight physics (same as working_flight.html) ---
+        let position = new THREE.Vector3(0, 3, 0);
+        let velocity = new THREE.Vector3(0, 0, 0);
+        let rotation = new THREE.Euler(0, 0, 0, 'YXZ');
+        let throttle = 0;
+        let propAngle = 0;
+        const maxThrottle = 1.0;
+        const drag = 0.98;
+        const liftFactor = 0.03;
+        const controlSensitivity = 0.03;
+
+        const keyState = {{
+            ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false,
+            KeyW: false, KeyS: false, KeyA: false, KeyD: false,
+            KeyQ: false, KeyE: false, KeyR: false, KeyP: false
+        }};
+
+        window.addEventListener('keydown', (e) => {{
+            const code = e.code;
+            if (keyState.hasOwnProperty(code)) keyState[code] = true;
+            if (code === 'KeyR') {{
+                position.set(0, 3, 0);
+                velocity.set(0, 0, 0);
+                throttle = 0;
+                rotation.set(0, 0, 0);
+            }}
+            if (code === 'KeyP') physicsEnabled = !physicsEnabled;
+            e.preventDefault();
+        }});
+        window.addEventListener('keyup', (e) => {{
+            if (keyState.hasOwnProperty(e.code)) keyState[e.code] = false;
+        }});
+
+        // Chase camera
+        const cameraOffset = new THREE.Vector3(0, 1.2, 6);
+        function updateCamera() {{
+            if (!airplane) return;
+            const worldOffset = cameraOffset.clone().applyQuaternion(airplane.quaternion);
+            camera.position.lerp(position.clone().add(worldOffset), 0.1);
+            camera.lookAt(position);
+        }}
+
+        let lastTime = performance.now();
+        function animate() {{
+            const now = performance.now();
+            let dt = Math.min(0.033, (now - lastTime) / 1000);
+            lastTime = now;
+            if (dt < 0.01) dt = 0.016;
+
+            if (keyState.KeyQ) throttle -= 1.0 * dt;
+            if (keyState.KeyE) throttle += 1.0 * dt;
+            throttle = Math.max(0, Math.min(maxThrottle, throttle));
+
+            let pitchInput = (keyState.ArrowUp || keyState.KeyW ? 1 : (keyState.ArrowDown || keyState.KeyS ? -1 : 0));
+            let rollInput = (keyState.ArrowRight || keyState.KeyD ? 1 : (keyState.ArrowLeft || keyState.KeyA ? -1 : 0));
+
+            if (physicsEnabled) {{
+                const thrust = throttle * 12.0;
+                const pitchRate = pitchInput * controlSensitivity * (0.5 + throttle*0.5);
+                const rollRate = rollInput * controlSensitivity * (0.5 + throttle*0.5);
+                rotation.x += pitchRate * dt;
+                rotation.z += rollRate * dt;
+                rotation.x = Math.max(-Math.PI/2.2, Math.min(Math.PI/2.2, rotation.x));
+                rotation.z = Math.max(-Math.PI/2.2, Math.min(Math.PI/2.2, rotation.z));
+
+                const quat = new THREE.Quaternion().setFromEuler(rotation);
+                const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(quat);
+                const worldThrust = forward.multiplyScalar(thrust);
+                let worldAcc = worldThrust.clone();
+                worldAcc.y -= 9.8 * dt;
+                const speed = velocity.length();
+                const lift = speed * speed * liftFactor * (pitchInput * 0.5 + 0.2);
+                worldAcc.y += lift;
+                velocity.x += worldAcc.x * dt;
+                velocity.y += worldAcc.y * dt;
+                velocity.z += worldAcc.z * dt;
+                velocity.multiplyScalar(1 - drag * dt);
+                position.x += velocity.x * dt;
+                position.y += velocity.y * dt;
+                position.z += velocity.z * dt;
+                if (position.y < -1) position.y = -1;
+            }} else {{
+                const rotSpeed = 0.05;
+                if (pitchInput !== 0) rotation.x += pitchInput * rotSpeed;
+                if (rollInput !== 0) rotation.z += rollInput * rotSpeed;
+                rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, rotation.x));
+                rotation.z = Math.max(-Math.PI/2, Math.min(Math.PI/2, rotation.z));
+                const speed = throttle * 12;
+                if (airplane) {{
+                    const quat = new THREE.Quaternion().setFromEuler(rotation);
+                    const forward = new THREE.Vector3(0,0,-1).applyQuaternion(quat);
+                    position.x += forward.x * speed * dt;
+                    position.y += forward.y * speed * dt;
+                    position.z += forward.z * speed * dt;
+                }}
+                if (position.y < -1) position.y = -1;
+                velocity.set(0,0,0);
+            }}
+
+            if (airplane) {{
+                airplane.position.copy(position);
+                airplane.rotation.set(rotation.x, rotation.y, rotation.z);
+                propAngle += throttle * 20 * dt;
+                for (let prop of propellers) prop.rotation.x = propAngle;
+            }}
+
+            updateCamera();
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }}
+        animate();
+        console.log('Flight simulator ready');
+    </script>
+</body>
+</html>"""
+    return html
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model', default='models/scene.gltf')
+    parser.add_argument('-o', '--output', default='airport_flight.html')
+    args = parser.parse_args()
+    Path(args.output).write_text(generate_html(args.model), encoding='utf-8')
+    print(f"✅ Generated: {args.output}")
+    print("\n➡️ Run: python -m http.server 8000")
+    print("   Then open http://localhost:8000/airport_flight.html")
+    print("\n   The airplane will appear level over a runway texture.")
+    print("   Controls: arrow keys, Q/E throttle, R reset, P physics.")
+
+if __name__ == '__main__':
+    main()

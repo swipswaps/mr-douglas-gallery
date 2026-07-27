@@ -1,0 +1,11 @@
+Model Information:
+* title:	DC3
+* source:	https://sketchfab.com/3d-models/dc3-f8f0698113bc4f04bb4fa83e64901874
+* author:	RevaX (https://sketchfab.com/RevaX)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "DC3" (https://sketchfab.com/3d-models/dc3-f8f0698113bc4f04bb4fa83e64901874) by RevaX (https://sketchfab.com/RevaX) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
