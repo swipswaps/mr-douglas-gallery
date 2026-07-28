@@ -1,0 +1,72 @@
+9:32:30 PM DOM ready, attaching event listeners...
+9:32:30 PM Canvas ready
+9:32:30 PM Rendering 188 posts
+9:32:31 PM Adding checkboxes to 188 cards
+9:32:31 PM === GALLERY v0032 READY ===
+9:32:31 PM 🎬 Storyboard button is visible at bottom-right
+9:32:31 PM 🎥 Video thumbnails now show actual video previews
+9:32:32 PM ✓ 01.jpg
+9:32:32 PM ✓ 01.jpg
+9:32:32 PM ✓ 01.jpg
+9:32:32 PM ✓ 01.jpg
+9:32:32 PM ✓ 01.jpg
+9:32:32 PM ✓ 01.jpg
+9:32:32 PM ✓ 01.jpg
+9:32:32 PM ✓ 01.jpg
+9:32:32 PM ✓ 01.jpg
+9:32:36 PM Added: 01.jpg
+9:32:37 PM ✓ 01.jpg
+9:32:37 PM ✓ 01.jpg
+9:32:37 PM ✓ 01.jpg
+9:32:40 PM Added: 01.jpg
+9:32:42 PM ✓ 01.jpg
+9:32:42 PM ✓ 01.jpg
+9:32:45 PM Added: 01.jpg
+9:32:52 PM ✓ 01.jpg
+9:32:52 PM ✓ 01.jpg
+9:32:52 PM ✓ 01.jpg
+9:32:52 PM ✓ 01.jpg
+9:32:53 PM ✓ 01.jpg
+9:32:53 PM ✓ 01.jpg
+9:32:56 PM ✓ 01.jpg
+9:32:56 PM ✓ 01.jpg
+9:32:56 PM ✓ 01.jpg
+9:32:58 PM ✓ 01.jpg
+9:32:58 PM ✓ 01.jpg
+9:32:58 PM ✓ 01.jpg
+9:33:00 PM ✓ 01.jpg
+9:33:04 PM Added: 01.jpg
+9:33:06 PM ✓ 01.jpg
+9:33:06 PM ✓ 01.jpg
+9:33:06 PM ✓ 01.jpg
+9:33:08 PM Added: 01.jpg
+9:33:12 PM Syncing 5 images
+9:33:12 PM Already added
+9:33:12 PM Already added
+9:33:12 PM Already added
+9:33:12 PM Already added
+9:33:12 PM Already added
+9:33:15 PM ✓ 01.jpg
+9:33:15 PM ✓ 01.jpg
+9:33:15 PM ✓ 01.jpg
+9:33:18 PM ✓ 01.jpg
+9:33:18 PM ✓ 01.jpg
+9:33:20 PM ✓ 01.jpg
+9:33:20 PM ✓ 01.jpg
+9:33:21 PM ✓ 01.jpg
+9:33:23 PM ✓ 01.jpg
+9:33:23 PM ✓ 01.jpg
+9:33:25 PM ✓ 01.jpg
+9:33:25 PM ✓ 01.jpg
+9:33:27 PM ✓ 01.jpg
+9:33:27 PM ✓ 01.jpg
+9:33:28 PM ✓ 01.jpg
+9:33:28 PM ✓ 01.jpg
+9:33:33 PM ✓ 01.jpg
+9:33:33 PM ✓ 01.jpg
+9:33:33 PM ✓ 01.jpg
+9:33:33 PM ✓ 01.jpg
+9:33:33 PM ✓ 01.jpg
+9:33:36 PM ✓ 01.jpg
+9:33:36 PM ✓ 01.jpg
+9:33:38 PM Added: 01.jpg

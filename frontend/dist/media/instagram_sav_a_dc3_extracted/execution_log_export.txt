@@ -1,0 +1,14 @@
+=== EXECUTION LOGS ===
+2026-05-13T14:39:28.897263 | START | INFO | Gallery build started | 
+2026-05-13T14:39:29.097329 | DB_LOAD | START | Loading from instagram_posts.db | 
+2026-05-13T14:40:27.316619 | DB_LOAD | COMPLETE | Loaded 172 posts | 
+2026-05-13T14:40:29.783906 | HISTORIC | COMPLETE | Added 16 historic images | 
+2026-05-13T14:40:30.013429 | JSON_SAVE | COMPLETE | Saved posts_with_authors.json | 
+2026-05-13T14:40:30.224648 | HTML_BUILD | START | Building HTML with 188 posts | 
+2026-05-13T14:40:30.409968 | HTML_BUILD | COMPLETE | HTML built successfully | 
+2026-05-13T14:40:30.564109 | HTML_SAVE | COMPLETE | Generated index_v0010.html | 
+2026-05-13T14:40:30.780130 | COMPLETE | INFO | Build complete. Total posts: 188 | 
+2026-05-13T16:04:17.210893 | START | INFO | Gallery build v0016 started | 
+2026-05-13T16:04:17.780861 | DB_LOAD | START | Loading from instagram_posts.db | 
+2026-05-13T16:05:16.658339 | DB_LOAD | COMPLETE | Loaded 172 posts | 
+2026-05-13T16:05:21.467752 | COMPLETE | INFO | Build complete. Total posts: 188 | 
