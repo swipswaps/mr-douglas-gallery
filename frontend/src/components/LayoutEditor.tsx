@@ -558,6 +558,8 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
 
   // --- Canvas mouse handlers ---
   const onCanvasMouseDown = (e: React.MouseEvent) => {
+    console.log("[MouseDown] fired");
+    console.log("[MouseDown] target:", (e.target as HTMLElement).tagName, (e.target as HTMLElement).getAttribute("data-item-id"));
     if (e.button !== 0) return;
     if ((e.target as HTMLElement).closest('[data-item-id]')) return;
     deselectAll();
@@ -569,6 +571,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
   };
 
   const onCanvasMouseMove = (e: React.MouseEvent) => {
+    console.log("[MouseMove] fired, resizeTargetId:", resizeTargetId, "resizeStart:", resizeStart, "resizeCorner:", resizeCorner);
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
     const x = e.clientX - rect.left;
@@ -630,6 +633,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
   };
 
   const onCanvasMouseUp = (_e: React.MouseEvent) => {
+    console.log("[MouseUp] fired, dragTargetId:", dragTargetId, "isDragSelecting:", isDragSelecting);
     if (dragTargetId) {
       setDragTargetId(null);
       setDragOffset(null);
@@ -846,10 +850,41 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
     }
     items.forEach((item) => {
       if (item.type === 'image' && item.post) {
-        const imgUrl = item.post.thumbnail || item.post.media[0] || '';
-        if (!imgUrl) return;
-        svg += `<image href="${imgUrl}" x="${item.x}" y="${item.y}" width="${item.width}" height="${item.height}" preserveAspectRatio="xMidYMid meet"/>`;
-      } else if (item.type === 'text' && item.text) {
+    const imgUrl = item.post.thumbnail || item.post.media[0] || '';
+    return (
+      <div
+        key={item.id}
+        data-item-id={item.id}
+        style={{
+          position: 'absolute',
+          left: item.x,
+          top: item.y,
+          width: item.width,
+          height: item.height,
+          cursor: 'grab',
+          border: borderStyle,
+          overflow: 'hidden',
+          background: '#fff',
+        }}
+        onMouseDown={(e) => { e.stopPropagation(); onItemMouseDown(e, item.id); }}
+        onDoubleClick={() => item.post && openDetail(item.post)}
+      >
+        <img
+          src={imgUrl}
+          alt={item.postId}
+          style={{ width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' }}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=";
+          }}
+        />
+        {/* Unconditional resize handles */}
+        <div style={{ position: 'absolute', right: -6, bottom: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nwse-resize', zIndex: 10 }} />
+        <div style={{ position: 'absolute', left: -6, bottom: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nesw-resize', zIndex: 10 }} />
+        <div style={{ position: 'absolute', right: -6, top: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nesw-resize', zIndex: 10 }} />
+        <div style={{ position: 'absolute', left: -6, top: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nwse-resize', zIndex: 10 }} />
+      </div>
+    );
+  } else if (item.type === 'text' && item.text) {
         const strokeAttr = item.strokeWidth ? `stroke="${item.strokeColor || '#000000'}" stroke-width="${item.strokeWidth}"` : '';
         svg += `<text x="${item.x + 10}" y="${item.y + 40}" font-family="${item.fontFamily || 'Arial'}" font-size="${item.fontSize || 24}" fill="${item.color || '#ffffff'}" font-weight="bold" ${strokeAttr}>${item.text}</text>`;
       }
@@ -1096,7 +1131,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                               onMouseDown={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                setResizeTargetId(item.id);
+                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
                                 setResizeCorner('se');
                                 setResizeStart({ x: e.clientX, y: e.clientY });
                               }}
@@ -1118,7 +1153,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                               onMouseDown={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                setResizeTargetId(item.id);
+                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
                                 setResizeCorner('sw');
                                 setResizeStart({ x: e.clientX, y: e.clientY });
                               }}
@@ -1140,7 +1175,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                               onMouseDown={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                setResizeTargetId(item.id);
+                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
                                 setResizeCorner('ne');
                                 setResizeStart({ x: e.clientX, y: e.clientY });
                               }}
@@ -1162,7 +1197,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                               onMouseDown={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                setResizeTargetId(item.id);
+                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
                                 setResizeCorner('nw');
                                 setResizeStart({ x: e.clientX, y: e.clientY });
                               }}
@@ -1226,7 +1261,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                               onMouseDown={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                setResizeTargetId(item.id);
+                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
                                 setResizeCorner('se');
                                 setResizeStart({ x: e.clientX, y: e.clientY });
                               }}
@@ -1247,7 +1282,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                               onMouseDown={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                setResizeTargetId(item.id);
+                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
                                 setResizeCorner('sw');
                                 setResizeStart({ x: e.clientX, y: e.clientY });
                               }}
@@ -1268,7 +1303,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                               onMouseDown={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                setResizeTargetId(item.id);
+                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
                                 setResizeCorner('ne');
                                 setResizeStart({ x: e.clientX, y: e.clientY });
                               }}
@@ -1289,7 +1324,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                               onMouseDown={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                setResizeTargetId(item.id);
+                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
                                 setResizeCorner('nw');
                                 setResizeStart({ x: e.clientX, y: e.clientY });
                               }}
