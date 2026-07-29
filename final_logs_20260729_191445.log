@@ -1,0 +1,47 @@
+🚀 Final diagnostic (log: final_logs_20260729_191445.log)
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 725 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.71 kB │ gzip:   0.39 kB
+dist/assets/index-CGwidwU3.css      0.15 kB │ gzip:   0.15 kB
+dist/assets/index-BvNZ2YzR.js   1,302.35 kB │ gzip: 358.35 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 12.51s
+📄 Checking build output...
+total 288
+drwxr-xr-x. 1 owner owner     62 Jul 29 19:15 .
+drwxr-xr-x. 1 owner owner    258 Jul 29 19:14 ..
+drwxr-xr-x. 1 owner owner     70 Jul 29 19:15 assets
+-rw-r--r--. 1 owner owner    708 Jul 29 19:15 index.html
+drwxr-xr-x. 1 owner owner     58 Jul 29 19:15 media
+-rw-r--r--. 1 owner owner 288833 Jul 29 19:15 posts.json
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mr. Douglas 3D Gallery</title>
+    <script type="module" crossorigin src="/mr-douglas-gallery/assets/index-BvNZ2YzR.js"></script>
+    <link rel="stylesheet" crossorigin href="/mr-douglas-gallery/assets/index-CGwidwU3.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+▶️  Starting vite preview on port 8080...
+❌ Server failed to start.
