@@ -1,0 +1,63 @@
+🚀 Restoring from debug copy (log: debug_restore_20260729_181047.log)
+
+📂 Backup: frontend/src/components/LayoutEditor.tsx.bak.20260729_181047
+✅ Restored debug/LayoutEditor_20260729_175248.tsx
+📄 Current tail (before append):
+     1	                  }
+     2	                  return null;
+     3	                })}
+     4	              </div>
+     5	            </DropZone>
+     6	          </div>
+     7	        </div>
+     8	
+     9	        {/* Detail Modal */}
+    10	        {detailPost && <DetailModal post={detailPost} onClose={closeDetail} />}
+    11	      </div>
+    12	    </DndProvider>
+    13	  );
+    14	};
+    15	}
+    16	}
+    17	  );
+    18	export default LayoutEditor;
+    19	
+    20	
+
+⚠️  Export already present – checking for complete structure...
+✅ Appended/cleaned closing structure.
+📄 New tail (after append):
+     1	                      </div>
+     2	                    );
+     3	                  }
+     4	                  return null;
+     5	                })}
+     6	              </div>
+     7	            </DropZone>
+     8	          </div>
+     9	        </div>
+    10	
+    11	        {/* Detail Modal */}
+    12	        {detailPost && <DetailModal post={detailPost} onClose={closeDetail} />}
+    13	      </div>
+    14	    </DndProvider>
+    15	  );
+    16	};
+    17	}
+    18	}
+    19	  );
+    20	export default LayoutEditor;
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+src/components/LayoutEditor.tsx(830,3): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(1020,3): error TS1128: Declaration or statement expected.
+❌ Build failed with exit code 2.
+
+⏭️  Skipping deployment.
+ℹ️  Restoring backup.
+📤 Pushing log...
