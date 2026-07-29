@@ -1,0 +1,81 @@
+🚀 Final return fix (log: return_final_20260729_175115.log)
+
+📄 LayoutEditor component structure:
+76:const GridOverlay = ({ size, width, height }: { size: number; width: number; height: number }) => {
+79:  return (
+80:    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+81:      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+82:        <defs>
+83:          <pattern id="gridPattern" width={size} height={size} patternUnits="userSpaceOnUse">
+84:            <circle cx={size/2} cy={size/2} r="1" fill="#888" />
+85:          </pattern>
+86:        </defs>
+87:        <rect width="100%" height="100%" fill="url(#gridPattern)" />
+88:        <g fontSize="10" fill="#aaa" fontFamily="monospace">
+90:            <text key={`col-${i}`} x={i * size + 4} y={14}>{i * size}</text>
+91:          ))}
+93:            <text key={`row-${i}`} x={4} y={i * size + 14}>{i * size}</text>
+94:          ))}
+95:        </g>
+96:      </svg>
+97:    </div>
+98:  );
+112:  return (
+113:    <div
+130:      <img src={thumbUrl} alt={post.id} style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '2px' }} />
+131:      <span style={{ fontSize: FONT.sizeSmall, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{post.id}</span>
+132:    </div>
+133:  );
+145:      if (!clientOffset) return;
+153:  return (
+154:    <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', background: isOver ? `rgba(225,48,108,0.1)` : 'transparent' }}>
+156:    </div>
+157:  );
+
+ℹ️  Return already present.
+⚠️  No changes made.
+
+📄 After fix (first 30 relevant lines):
+76:const GridOverlay = ({ size, width, height }: { size: number; width: number; height: number }) => {
+79:  return (
+80:    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+81:      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+82:        <defs>
+83:          <pattern id="gridPattern" width={size} height={size} patternUnits="userSpaceOnUse">
+84:            <circle cx={size/2} cy={size/2} r="1" fill="#888" />
+85:          </pattern>
+86:        </defs>
+87:        <rect width="100%" height="100%" fill="url(#gridPattern)" />
+88:        <g fontSize="10" fill="#aaa" fontFamily="monospace">
+90:            <text key={`col-${i}`} x={i * size + 4} y={14}>{i * size}</text>
+91:          ))}
+93:            <text key={`row-${i}`} x={4} y={i * size + 14}>{i * size}</text>
+94:          ))}
+95:        </g>
+96:      </svg>
+97:    </div>
+98:  );
+112:  return (
+113:    <div
+130:      <img src={thumbUrl} alt={post.id} style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '2px' }} />
+131:      <span style={{ fontSize: FONT.sizeSmall, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{post.id}</span>
+132:    </div>
+133:  );
+145:      if (!clientOffset) return;
+153:  return (
+154:    <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', background: isOver ? `rgba(225,48,108,0.1)` : 'transparent' }}>
+156:    </div>
+157:  );
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+src/components/LayoutEditor.tsx(830,3): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(1020,3): error TS1128: Declaration or statement expected.
+❌ Build failed with exit code 2.
+
+⏭️  Skipping deployment.
+📤 Pushing log...
