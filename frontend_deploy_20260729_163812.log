@@ -1,0 +1,24 @@
+🚀 Starting frontend build and deploy (log: frontend_deploy_20260729_163812.log)
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+src/components/LayoutEditor.tsx(1020,1): error TS1005: '}' expected.
+🔍 Checking built JS for resizeTargetId...
+❌ RESIZE CODE NOT FOUND in frontend/dist/assets/index-c5S5ctIH.js
+⚠️  backend/public does not exist – creating it.
+🔄 Restarting backend container...
+time="2026-07-29T16:38:44-04:00" level=warning msg="/home/owner/Documents/mrdouglas.org/mr-douglas-gallery/backend/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Network backend_default Creating 
+ Network backend_default Created 
+ Container backend-backend-1 Creating 
+ Container backend-backend-1 Created 
+ Container backend-backend-1 Starting 
+ Container backend-backend-1 Started 
+✅ Backend restarted.
+🌐 Checking live site at http://localhost:3000 ...
+⚠️  Could not find JS URL in index.html
+📤 Adding log to git...
