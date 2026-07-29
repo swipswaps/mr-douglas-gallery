@@ -1,0 +1,25 @@
+🚀 Starting capture (log: console_capture_20260729_185021.log)
+▶️  Starting Python HTTP server on port 8080...
+✅ Server running on port 8080
+📦 Installing Playwright...
+BEWARE: your OS is not officially supported by Playwright; downloading fallback build for ubuntu24.04-x64.
+BEWARE: your OS is not officially supported by Playwright; downloading fallback build for ubuntu24.04-x64.
+BEWARE: your OS is not officially supported by Playwright; downloading fallback build for ubuntu24.04-x64.
+▶️  Capturing console logs...
+Traceback (most recent call last):
+  File "<string>", line 42, in <module>
+    asyncio.run(capture())
+    ~~~~~~~~~~~^^^^^^^^^^^
+  File "/usr/lib64/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/usr/lib64/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/lib64/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "<string>", line 17, in capture
+    thumb = await page.locator('div[style*="cursor: grab"]').first
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Locator' object can't be awaited
