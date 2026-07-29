@@ -1,0 +1,60 @@
+🚀 Appending missing closing lines (log: append_fix_20260729_180306.log)
+
+📄 Current tail (last 20 lines):
+     1	                  }
+     2	                  return null;
+     3	                })}
+     4	              </div>
+     5	            </DropZone>
+     6	          </div>
+     7	        </div>
+     8	
+     9	        {/* Detail Modal */}
+    10	        {detailPost && <DetailModal post={detailPost} onClose={closeDetail} />}
+    11	      </div>
+    12	    </DndProvider>
+    13	  );
+    14	};
+    15	}
+    16	}
+    17	  );
+    18	export default LayoutEditor;
+    19	
+    20	
+
+⚠️  No missing braces or export – file may already be correct.
+
+📄 New tail (last 20 lines):
+     1	                  }
+     2	                  return null;
+     3	                })}
+     4	              </div>
+     5	            </DropZone>
+     6	          </div>
+     7	        </div>
+     8	
+     9	        {/* Detail Modal */}
+    10	        {detailPost && <DetailModal post={detailPost} onClose={closeDetail} />}
+    11	      </div>
+    12	    </DndProvider>
+    13	  );
+    14	};
+    15	}
+    16	}
+    17	  );
+    18	export default LayoutEditor;
+    19	
+    20	
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+src/components/LayoutEditor.tsx(830,3): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(1020,3): error TS1128: Declaration or statement expected.
+❌ Build failed with exit code 2.
+
+⏭️  Skipping deployment.
+📤 Pushing log...
