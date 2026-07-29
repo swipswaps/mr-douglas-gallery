@@ -1,0 +1,5 @@
+🚀 Testing for resize handles (log: test_handles_20260729_193638.log)
+⚠️  Backend not serving frontend. Starting static server...
+🌐 Testing http://localhost:3000
+❌ Resize handle CSS NOT found in served HTML.
+✅ Resize handle CSS found in JavaScript bundle.
