@@ -1,0 +1,97 @@
+🚀 Final cleanup script (log: cleanup_20260729_180725.log)
+
+📂 Backup: frontend/src/components/LayoutEditor.tsx.bak.20260729_180725
+✅ Cleaned file.
+📄 New tail (last 20 lines):
+     1	                      </div>
+     2	                  }
+     3	                  return null;
+     4	                })}
+     5	              </div>
+     6	            </DropZone>
+     7	          </div>
+     8	        </div>
+     9	
+    10	        {/* Detail Modal */}
+    11	        {detailPost && <DetailModal post={detailPost} onClose={closeDetail} />}
+    12	      </div>
+    13	    </DndProvider>
+    14	};
+    15	}
+    16	}
+    17	  );
+    18	);
+    19	};
+    20	export default LayoutEditor;
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+src/components/LayoutEditor.tsx(23,7): error TS1005: ':' expected.
+src/components/LayoutEditor.tsx(30,7): error TS1005: ':' expected.
+src/components/LayoutEditor.tsx(37,11): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(37,22): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(38,13): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(45,8): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(46,8): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(47,14): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(48,12): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(49,9): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(50,19): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(51,15): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(52,15): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(53,15): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(54,15): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(55,12): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(56,11): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(57,1): error TS1128: Declaration or statement expected.
+src/components/LayoutEditor.tsx(68,7): error TS1005: ':' expected.
+src/components/LayoutEditor.tsx(68,32): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(69,7): error TS1005: ':' expected.
+src/components/LayoutEditor.tsx(69,45): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(72,7): error TS1005: ':' expected.
+src/components/LayoutEditor.tsx(190,9): error TS1005: ':' expected.
+src/components/LayoutEditor.tsx(190,51): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(191,5): error TS1136: Property assignment expected.
+src/components/LayoutEditor.tsx(194,14): error TS1136: Property assignment expected.
+src/components/LayoutEditor.tsx(196,15): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(197,14): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(198,16): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(199,21): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(200,15): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(201,16): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(202,16): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(203,19): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(204,12): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(205,17): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(206,19): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(207,19): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(208,18): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(209,20): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(210,7): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(211,5): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(212,7): error TS2657: JSX expressions must have one parent element.
+src/components/LayoutEditor.tsx(214,5): error TS1128: Declaration or statement expected.
+src/components/LayoutEditor.tsx(217,1): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(316,49): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(362,5): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(362,30): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(362,33): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(362,34): error TS1136: Property assignment expected.
+src/components/LayoutEditor.tsx(458,6): error TS1005: ';' expected.
+src/components/LayoutEditor.tsx(591,5): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(591,31): error TS1003: Identifier expected.
+src/components/LayoutEditor.tsx(594,3): error TS1005: ',' expected.
+src/components/LayoutEditor.tsx(594,9): error TS1005: ':' expected.
+src/components/LayoutEditor.tsx(954,19): error TS1005: ')' expected.
+src/components/LayoutEditor.tsx(969,3): error TS1128: Declaration or statement expected.
+src/components/LayoutEditor.tsx(970,1): error TS1128: Declaration or statement expected.
+src/components/LayoutEditor.tsx(971,1): error TS1128: Declaration or statement expected.
+❌ Build failed with exit code 2.
+
+⏭️  Skipping deployment.
+ℹ️  Restoring backup – manual edit required.
+📤 Pushing log...
