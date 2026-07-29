@@ -1087,129 +1087,44 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
                   const borderStyle = isSelected ? `3px solid ${COLORS.primary}` : (item.borderWidth ? `${item.borderWidth}px solid ${item.borderColor || '#ccc'}` : 'none');
 
                   if (item.type === 'image' && item.post) {
-                    const imgUrl = item.post.thumbnail || item.post.media[0] || '';
-                    return (
-                      <div
-                        key={item.id}
-                        data-item-id={item.id}
-                        style={{
-                          position: 'absolute',
-                          left: item.x,
-                          top: item.y,
-                          width: item.width,
-                          height: item.height,
-                          cursor: 'grab',
-                          border: borderStyle,
-                          overflow: 'hidden',
-                          background: '#fff',
-                        }}
-                        onMouseDown={(e) => { e.stopPropagation(); onItemMouseDown(e, item.id); }}
-                        onDoubleClick={() => item.post && openDetail(item.post)}
-                      >
-                        <img
-                          src={imgUrl}
-                          alt={item.postId}
-                          style={{ width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' }}
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=";
-                          }}
-                        />
-                        {/* Resize handles */}
-                        {isSelected && (
-                          <>
-                            {/* SE handle */}
-                            <div
-                              style={{
-                                position: 'absolute',
-                                right: -6,
-                                bottom: -6,
-                                width: 12,
-                                height: 12,
-                                background: COLORS.primary,
-                                border: '2px solid white',
-                                borderRadius: '2px',
-                                cursor: 'nwse-resize',
-                                zIndex: 10,
-                              }}
-                              onMouseDown={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
-                                setResizeCorner('se');
-                                setResizeStart({ x: e.clientX, y: e.clientY });
-                              }}
-                            />
-                            {/* SW handle */}
-                            <div
-                              style={{
-                                position: 'absolute',
-                                left: -6,
-                                bottom: -6,
-                                width: 12,
-                                height: 12,
-                                background: COLORS.primary,
-                                border: '2px solid white',
-                                borderRadius: '2px',
-                                cursor: 'nesw-resize',
-                                zIndex: 10,
-                              }}
-                              onMouseDown={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
-                                setResizeCorner('sw');
-                                setResizeStart({ x: e.clientX, y: e.clientY });
-                              }}
-                            />
-                            {/* NE handle */}
-                            <div
-                              style={{
-                                position: 'absolute',
-                                right: -6,
-                                top: -6,
-                                width: 12,
-                                height: 12,
-                                background: COLORS.primary,
-                                border: '2px solid white',
-                                borderRadius: '2px',
-                                cursor: 'nesw-resize',
-                                zIndex: 10,
-                              }}
-                              onMouseDown={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
-                                setResizeCorner('ne');
-                                setResizeStart({ x: e.clientX, y: e.clientY });
-                              }}
-                            />
-                            {/* NW handle */}
-                            <div
-                              style={{
-                                position: 'absolute',
-                                left: -6,
-                                top: -6,
-                                width: 12,
-                                height: 12,
-                                background: COLORS.primary,
-                                border: '2px solid white',
-                                borderRadius: '2px',
-                                cursor: 'nwse-resize',
-                                zIndex: 10,
-                              }}
-                              onMouseDown={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
-                                setResizeCorner('nw');
-                                setResizeStart({ x: e.clientX, y: e.clientY });
-                              }}
-                            />
-                          </>
-                        )}
-                      </div>
-                    );
-                  } else if (item.type === 'text') {
+    const imgUrl = item.post.thumbnail || item.post.media[0] || '';
+    // Force isSelected to true so handles always show
+    const isSelected = true;
+    const borderStyle = isSelected ? `3px solid ${COLORS.primary}` : 'none';
+    return (
+      <div
+        key={item.id}
+        data-item-id={item.id}
+        style={{
+          position: 'absolute',
+          left: item.x,
+          top: item.y,
+          width: item.width,
+          height: item.height,
+          cursor: 'grab',
+          border: borderStyle,
+          overflow: 'hidden',
+          background: '#fff',
+        }}
+        onMouseDown={(e) => { e.stopPropagation(); onItemMouseDown(e, item.id); }}
+        onDoubleClick={() => item.post && openDetail(item.post)}
+      >
+        <img
+          src={imgUrl}
+          alt={item.postId}
+          style={{ width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' }}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=";
+          }}
+        />
+        {/* Unconditional resize handles – always visible */}
+        <div style={{ position: 'absolute', right: -6, bottom: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nwse-resize', zIndex: 10 }} />
+        <div style={{ position: 'absolute', left: -6, bottom: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nesw-resize', zIndex: 10 }} />
+        <div style={{ position: 'absolute', right: -6, top: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nesw-resize', zIndex: 10 }} />
+        <div style={{ position: 'absolute', left: -6, top: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nwse-resize', zIndex: 10 }} />
+      </div>
+    );
+  } else if (item.type === 'text') {
                     return (
                       <div
                         key={item.id}
