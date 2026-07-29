@@ -34,12 +34,20 @@ export default function PostModal({ post, onClose }: { post: Post; onClose: () =
       >
         <h3>{post.date}</h3>
         <p>{post.caption}</p>
+        {post.url && (
+          <div style={{ marginTop: '0.5rem' }}>
+            <a href={post.url} target="_blank" rel="noopener noreferrer" 
+               style={{ color: '#E1306C', textDecoration: 'underline' }}>
+              🔗 View on Instagram
+            </a>
+          </div>
+        )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
           {post.media.map((src, idx) => {
             if (src.endsWith('.mp4') || src.endsWith('.webm')) {
-              return <video key={idx} src={src} controls style={{ maxWidth: '100%', maxHeight: '400px' }} />;
+              return <video key={idx} src={import.meta.env.BASE_URL + src} controls style={{ maxWidth: '100%', maxHeight: '400px' }} />;
             } else {
-              return <img key={idx} src={src} alt={`${post.id}-${idx}`} style={{ maxWidth: '100%', maxHeight: '400px', objectFit: 'contain' }} />;
+              return <img key={idx} src={import.meta.env.BASE_URL + src} alt={`${post.id}-${idx}`} style={{ maxWidth: '100%', maxHeight: '400px', objectFit: 'contain' }} />;
             }
           })}
         </div>

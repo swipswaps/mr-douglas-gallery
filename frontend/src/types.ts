@@ -4,4 +4,6 @@ export interface Post {
   caption: string;
   media: string[];
   comments: string[];
+  url?: string;
+  thumbnail?: string;
 }

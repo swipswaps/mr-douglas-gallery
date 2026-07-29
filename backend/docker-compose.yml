@@ -6,7 +6,7 @@ services:
       - "3000:3000"
     volumes:
       - ./db:/app/db
-      - /home/owner/Documents/mrdouglas.org/instagram_sav_a_dc3_extracted:/data/instagram_sav_a_dc3_extracted:ro
+      - ../frontend/public/media:/app/media:ro
     environment:
-      - MEDIA_ROOT=/data/instagram_sav_a_dc3_extracted
-      - DB_PATH=/app/db/posts.db
+      - NODE_ENV=production
+      - MEDIA_ROOT=/app/media
