@@ -1,0 +1,27 @@
+🚀 Direct TypeScript fix (log: ts_direct_20260729_174555.log)
+
+📄 Current line 237 (exact):
+const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, onBack }) => {$
+
+✅ Replaced line 237 successfully.
+
+📄 New line 237:
+const LayoutEditor = ({ posts, onBack }: { posts: Post[]; onBack: () => void }) => {$
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+src/App.tsx(56,61): error TS2786: 'LayoutEditor' cannot be used as a JSX component.
+  Its type '({ posts, onBack }: { posts: Post[]; onBack: () => void; }) => void' is not a valid JSX element type.
+    Type '({ posts, onBack }: { posts: Post[]; onBack: () => void; }) => void' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'void' is not assignable to type 'ReactNode'.
+src/components/LayoutEditor.tsx(76,24): error TS7031: Binding element 'size' implicitly has an 'any' type.
+src/components/LayoutEditor.tsx(76,30): error TS7031: Binding element 'width' implicitly has an 'any' type.
+src/components/LayoutEditor.tsx(76,37): error TS7031: Binding element 'height' implicitly has an 'any' type.
+❌ Build failed with exit code 2.
+
+⏭️  Skipping deployment.
+📤 Pushing log...
