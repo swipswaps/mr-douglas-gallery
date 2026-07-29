@@ -1,0 +1,134 @@
+🚀 Fixing return placement (log: return_correct_20260729_174930.log)
+
+📄 LayoutEditor component structure:
+76:const GridOverlay = ({ size, width, height }: { size: number; width: number; height: number }) => {
+79:  return (
+112:  return (
+145:      if (!clientOffset) return;
+153:  return (
+163:  return (
+185:              return <video key={i} src={src} controls style={{ maxWidth: '200px', maxHeight: '200px' }} />;
+187:              return <img key={i} src={src} alt={`${post.id}-${i}`} style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'contain' }} />;
+208:  return (
+237:const LayoutEditor = ({ posts, onBack }: { posts: Post[]; onBack: () => void }) => {
+242:      if (saved) return JSON.parse(saved);
+244:    return {};
+310:    return warnings;
+322:      if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
+323:      if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
+324:      return 0;
+338:    return () => document.removeEventListener('mouseup', handleGlobalMouseUp);
+340:    return sorted;
+350:      return;
+397:      return;
+477:      return {
+494:    if (e.button !== 0) return;
+507:    if (e.button !== 0) return;
+508:    if ((e.target as HTMLElement).closest('[data-item-id]')) return;
+511:    if (!rect) return;
+519:    if (!rect) return;
+531:          return { ...item, x: Math.max(0, item.x + deltaX), y: Math.max(0, item.y + deltaY) };
+533:        return item;
+537:      return;
+543:      if (!item) return;
+571:      return;
+588:      return;
+630:    if (selectedItems.length < 2) return;
+638:      if (!selectedIds.has(item.postId)) return item;
+649:      return { ...item, x: newX, y: newY };
+657:    if (selectedItems.length < 3) return;
+664:      if (!selectedIds.has(item.postId)) return item;
+666:      if (idx === -1 || idx === 0 || idx === sorted.length - 1) return item;
+668:      return { ...item, x: axis === 'horizontal' ? pos : item.x, y: axis === 'vertical' ? pos : item.y };
+677:      return;
+695:        if (!selectedIds.has(item.postId)) return item;
+696:        return { ...item, x: showGrid ? Math.round(minX / gridSize) * gridSize : minX, y: showGrid ? Math.round(minY / gridSize) * gridSize : minY };
+714:    if (!selectedItemId) return;
+721:    if (!selectedItemId) return;
+724:        return { ...item, ...props };
+726:      return item;
+731:    if (items.length === 0) return;
+753:        if (!blob) return;
+777:        if (!blob) return;
+798:        if (!imgUrl) return;
+829:  return (
+969:                {showGrid && <GridOverlay size={gridSize} width={pageWidth} height={pageHeight} />}
+981:                    return (
+994:                    return (
+1004:                  return null;
+1019:export default LayoutEditor;
+
+✅ Inserted return statement before JSX.
+✅ File updated.
+
+📄 After fix:
+76:const GridOverlay = ({ size, width, height }: { size: number; width: number; height: number }) => {
+79:  return (
+112:  return (
+145:      if (!clientOffset) return;
+153:  return (
+163:  return (
+185:              return <video key={i} src={src} controls style={{ maxWidth: '200px', maxHeight: '200px' }} />;
+187:              return <img key={i} src={src} alt={`${post.id}-${i}`} style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'contain' }} />;
+208:  return (
+237:const LayoutEditor = ({ posts, onBack }: { posts: Post[]; onBack: () => void }) => {
+242:      if (saved) return JSON.parse(saved);
+244:    return {};
+310:    return warnings;
+322:      if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
+323:      if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
+324:      return 0;
+338:    return () => document.removeEventListener('mouseup', handleGlobalMouseUp);
+340:    return sorted;
+350:      return;
+397:      return;
+477:      return {
+494:    if (e.button !== 0) return;
+507:    if (e.button !== 0) return;
+508:    if ((e.target as HTMLElement).closest('[data-item-id]')) return;
+511:    if (!rect) return;
+519:    if (!rect) return;
+531:          return { ...item, x: Math.max(0, item.x + deltaX), y: Math.max(0, item.y + deltaY) };
+533:        return item;
+537:      return;
+543:      if (!item) return;
+571:      return;
+588:      return;
+630:    if (selectedItems.length < 2) return;
+638:      if (!selectedIds.has(item.postId)) return item;
+649:      return { ...item, x: newX, y: newY };
+657:    if (selectedItems.length < 3) return;
+664:      if (!selectedIds.has(item.postId)) return item;
+666:      if (idx === -1 || idx === 0 || idx === sorted.length - 1) return item;
+668:      return { ...item, x: axis === 'horizontal' ? pos : item.x, y: axis === 'vertical' ? pos : item.y };
+677:      return;
+695:        if (!selectedIds.has(item.postId)) return item;
+696:        return { ...item, x: showGrid ? Math.round(minX / gridSize) * gridSize : minX, y: showGrid ? Math.round(minY / gridSize) * gridSize : minY };
+714:    if (!selectedItemId) return;
+721:    if (!selectedItemId) return;
+724:        return { ...item, ...props };
+726:      return item;
+731:    if (items.length === 0) return;
+753:        if (!blob) return;
+777:        if (!blob) return;
+798:        if (!imgUrl) return;
+829:  return (
+830:  return (
+970:                {showGrid && <GridOverlay size={gridSize} width={pageWidth} height={pageHeight} />}
+982:                    return (
+995:                    return (
+1005:                  return null;
+1021:export default LayoutEditor;
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+src/components/LayoutEditor.tsx(830,3): error TS1109: Expression expected.
+src/components/LayoutEditor.tsx(1020,3): error TS1128: Declaration or statement expected.
+❌ Build failed with exit code 2.
+
+⏭️  Skipping deployment.
+📤 Pushing log...
