@@ -1,0 +1,99 @@
+🚀 Fixing main render loop (log: render_loop_20260729_194925.log)
+📂 Backup: frontend/src/components/LayoutEditor.tsx.bak.20260729_194925
+✅ Replaced render loop image block with unconditional handles.
+📄 Diff of changes:
+1090,1212c1090,1127
+<                     const imgUrl = item.post.thumbnail || item.post.media[0] || '';
+<                     return (
+<                       <div
+<                         key={item.id}
+<                         data-item-id={item.id}
+<                         style={{
+<                           position: 'absolute',
+<                           left: item.x,
+<                           top: item.y,
+<                           width: item.width,
+<                           height: item.height,
+<                           cursor: 'grab',
+<                           border: borderStyle,
+<                           overflow: 'hidden',
+<                           background: '#fff',
+<                         }}
+<                         onMouseDown={(e) => { e.stopPropagation(); onItemMouseDown(e, item.id); }}
+<                         onDoubleClick={() => item.post && openDetail(item.post)}
+<                       >
+<                         <img
+<                           src={imgUrl}
+<                           alt={item.postId}
+<                           style={{ width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' }}
+<                           onError={(e) => {
+<                             (e.target as HTMLImageElement).src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=";
+<                           }}
+<                         />
+<                         {/* Resize handles */}
+<                         {isSelected && (
+<                           <>
+<                             {/* SE handle */}
+<                             <div
+<                               style={{
+<                                 position: 'absolute',
+<                                 right: -6,
+<                                 bottom: -6,
+<                                 width: 12,
+<                                 height: 12,
+<                                 background: COLORS.primary,
+<                                 border: '2px solid white',
+<                                 borderRadius: '2px',
+<                                 cursor: 'nwse-resize',
+<                                 zIndex: 10,
+<                               }}
+<                               onMouseDown={(e) => {
+<                                 e.stopPropagation();
+<                                 e.preventDefault();
+<                                 console.log("[Resize] handle clicked for item", item.id); setResizeTargetId(item.id);
+<                                 setResizeCorner('se');
+<                                 setResizeStart({ x: e.clientX, y: e.clientY });
+<                               }}
+<                             />
+<                             {/* SW handle */}
+<                             <div
+<                               style={{
+<                                 position: 'absolute',
+<                                 left: -6,
+<                                 bottom: -6,
+<                                 width: 12,
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 725 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.71 kB │ gzip:   0.39 kB
+dist/assets/index-CGwidwU3.css      0.15 kB │ gzip:   0.15 kB
+dist/assets/index-B0xZRDAj.js   1,303.04 kB │ gzip: 358.41 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 12.23s
+📂 Deploying...
+time="2026-07-29T19:49:45-04:00" level=warning msg="/home/owner/Documents/mrdouglas.org/mr-douglas-gallery/backend/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container backend-backend-1 Stopping 
+ Container backend-backend-1 Stopped 
+ Container backend-backend-1 Removing 
+ Container backend-backend-1 Removed 
+ Network backend_default Removing 
+ Network backend_default Removed 
+time="2026-07-29T19:49:59-04:00" level=warning msg="/home/owner/Documents/mrdouglas.org/mr-douglas-gallery/backend/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Network backend_default Creating 
+ Network backend_default Created 
+ Container backend-backend-1 Creating 
+ Container backend-backend-1 Created 
+ Container backend-backend-1 Starting 
+ Container backend-backend-1 Started 
