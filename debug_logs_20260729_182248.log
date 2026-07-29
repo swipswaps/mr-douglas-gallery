@@ -1,0 +1,58 @@
+🚀 Adding debug logs (log: debug_logs_20260729_182248.log)
+
+📂 Backup: frontend/src/components/LayoutEditor.tsx.bak.20260729_182248
+  File "<string>", line 41
+    return 'console.log([Resize]
+           ^
+SyntaxError: unterminated string literal (detected at line 41)
+📄 Showing changes around key areas:
+330-  const [logs, setLogs] = useState<string[]>([]);
+331-  const addLog = (message: string) => {
+332:    console.log(message);
+333-    setLogs((prev) => [...prev, message]);
+334-  };
+--
+350-        setResizeStart(null);
+351-        setResizeCorner(null);
+352:        console.log('Global mouseup reset resize state');
+353-      }
+354-    };
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 725 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.71 kB │ gzip:   0.39 kB
+dist/assets/index-CGwidwU3.css      0.15 kB │ gzip:   0.15 kB
+dist/assets/index-hhxmeYd9.js   1,301.64 kB │ gzip: 358.22 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 12.28s
+✅ Build succeeded.
+
+📂 Deploying...
+time="2026-07-29T18:23:07-04:00" level=warning msg="/home/owner/Documents/mrdouglas.org/mr-douglas-gallery/backend/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container backend-backend-1 Stopping 
+ Container backend-backend-1 Stopped 
+ Container backend-backend-1 Removing 
+ Container backend-backend-1 Removed 
+ Network backend_default Removing 
+ Network backend_default Removed 
+time="2026-07-29T18:23:21-04:00" level=warning msg="/home/owner/Documents/mrdouglas.org/mr-douglas-gallery/backend/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Network backend_default Creating 
+ Network backend_default Created 
+ Container backend-backend-1 Creating 
+ Container backend-backend-1 Created 
+ Container backend-backend-1 Starting 
+ Container backend-backend-1 Started 
+🌐 Deployed.
