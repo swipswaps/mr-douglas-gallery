@@ -1,0 +1,68 @@
+🚀 Fixing TypeScript error at line 237 (log: ts_fix_20260729_174252.log)
+
+📄 Context around line 237:
+     1	      <span style={{ fontSize: '18px' }}>{icon}</span>
+     2	      <span>{label}</span>
+     3	    </button>
+     4	  );
+     5	};
+     6	
+     7	// ===== MAIN COMPONENT =====
+     8	const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, onBack }) => {
+     9	  // --- Load settings ---
+    10	  const loadSettings = () => {
+    11	    try {
+    12	      const saved = localStorage.getItem(STORAGE_KEY);
+    13	      if (saved) return JSON.parse(saved);
+    14	    } catch (e) { /* ignore */ }
+    15	    return {};
+    16	  };
+    17	  const saved = loadSettings();
+    18	
+    19	  // --- State ---
+    20	  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+    21	  const [items, setItems] = useState<LayoutItem[]>([]);
+
+🔧 Fixing component return type...
+✅ Removed React.FC type annotation (let TypeScript infer).
+✅ File updated.
+
+📄 Fixed context around line 237:
+     1	      <span style={{ fontSize: '18px' }}>{icon}</span>
+     2	      <span>{label}</span>
+     3	    </button>
+     4	  );
+     5	};
+     6	
+     7	// ===== MAIN COMPONENT =====
+     8	const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, onBack }) => {
+     9	  // --- Load settings ---
+    10	  const loadSettings = () => {
+    11	    try {
+    12	      const saved = localStorage.getItem(STORAGE_KEY);
+    13	      if (saved) return JSON.parse(saved);
+    14	    } catch (e) { /* ignore */ }
+    15	    return {};
+    16	  };
+    17	  const saved = loadSettings();
+    18	
+    19	  // --- State ---
+    20	  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+    21	  const [items, setItems] = useState<LayoutItem[]>([]);
+
+📦 Building frontend...
+npm warn Unknown global config "python". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> mr-douglas-gallery@0.0.0 build
+> tsc && vite build
+
+src/components/LayoutEditor.tsx(76,24): error TS7031: Binding element 'size' implicitly has an 'any' type.
+src/components/LayoutEditor.tsx(76,30): error TS7031: Binding element 'width' implicitly has an 'any' type.
+src/components/LayoutEditor.tsx(76,37): error TS7031: Binding element 'height' implicitly has an 'any' type.
+src/components/LayoutEditor.tsx(237,7): error TS2322: Type '({ posts, onBack }: { posts: Post[]; onBack: () => void; }) => void' is not assignable to type 'FC<{ posts: Post[]; onBack: () => void; }>'.
+  Type 'void' is not assignable to type 'ReactNode'.
+❌ Build failed with exit code 2.
+
+⏭️  Skipping deployment due to build failure.
+
+📤 Adding log to git...
