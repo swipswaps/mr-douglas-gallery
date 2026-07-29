@@ -850,9 +850,10 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
     }
     items.forEach((item) => {
       if (item.type === 'image' && item.post) {
-    const isSelected = selectedItemId === item.id || selectedIds.has(item.postId);
-    const borderStyle = isSelected ? `3px solid ${COLORS.primary}` : (item.borderWidth ? `${item.borderWidth}px solid ${item.borderColor || '#ccc'}` : 'none');
     const imgUrl = item.post.thumbnail || item.post.media[0] || '';
+    // Define isSelected and borderStyle inside the block
+    const isSelected = true;  // Force handles to always show
+    const borderStyle = isSelected ? `3px solid ${COLORS.primary}` : 'none';
     return (
       <div
         key={item.id}
@@ -879,7 +880,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
             (e.target as HTMLImageElement).src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=";
           }}
         />
-        {/* Unconditional resize handles */}
+        {/* Unconditional resize handles – always visible */}
         <div style={{ position: 'absolute', right: -6, bottom: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nwse-resize', zIndex: 10 }} />
         <div style={{ position: 'absolute', left: -6, bottom: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nesw-resize', zIndex: 10 }} />
         <div style={{ position: 'absolute', right: -6, top: -6, width: 12, height: 12, background: '#E1306C', border: '2px solid white', borderRadius: '2px', cursor: 'nesw-resize', zIndex: 10 }} />
