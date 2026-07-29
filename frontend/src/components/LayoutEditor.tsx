@@ -851,6 +851,7 @@ const LayoutEditor: React.FC<{ posts: Post[]; onBack: () => void }> = ({ posts, 
     items.forEach((item) => {
       if (item.type === 'image' && item.post) {
     const imgUrl = item.post.thumbnail || item.post.media[0] || '';
+    const borderStyle = isSelected ? `3px solid ${COLORS.primary}` : (item.borderWidth ? `${item.borderWidth}px solid ${item.borderColor || '#ccc'}` : 'none');
     return (
       <div
         key={item.id}
