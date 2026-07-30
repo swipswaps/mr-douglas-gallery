@@ -1,0 +1,12 @@
+Console logs from https://swipswaps.github.io/mr-douglas-gallery/
+Captured at 2026-07-30T15:59:24.505Z
+============================================================
+
+[2026-07-30T15:59:20.408Z] [error] Failed to load resource: the server responded with a status of 404 ()
+[2026-07-30T15:59:20.429Z] [log] [DEBUG] ThreeScene mounted with 159 thumbnails
+[2026-07-30T15:59:20.431Z] [log] [DEBUG] Thumbnail positions: [array Array]
+[2026-07-30T15:59:24.125Z] [warn] []Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees for trusted content.
+[2026-07-30T15:59:24.363Z] [warn] [.WebGL-0x37fc015b4c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2026-07-30T15:59:24.364Z] [warn] [.WebGL-0x37fc015b4c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2026-07-30T15:59:24.364Z] [warn] [.WebGL-0x37fc015b4c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2026-07-30T15:59:24.364Z] [warn] [.WebGL-0x37fc015b4c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
