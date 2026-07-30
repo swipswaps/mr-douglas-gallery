@@ -1,0 +1,58 @@
+🚀 Diagnosing server (log: diagnose_server_20260729_201540.log)
+📄 server.js content (relevant lines):
+13:app.use('/media', express.static(process.env.MEDIA_ROOT || './media'));
+14:app.use(express.static('public'));
+
+📂 Files in backend/public/ (if any):
+total 288
+drwxr-xr-x. 1 owner owner     62 Jul 29 20:10 .
+drwxr-xr-x. 1 owner owner    140 Jul 29 20:14 ..
+drwxr-xr-x. 1 owner owner     70 Jul 29 20:10 assets
+-rw-r--r--. 1 owner owner    670 Jul 29 20:10 index.html
+drwxr-xr-x. 1 owner owner     58 Jul 29 20:10 media
+-rw-r--r--. 1 owner owner 288833 Jul 29 20:10 posts.json
+
+🐳 Container logs (last 20 lines):
+Backend running on port 3000
+
+🌐 Testing http://localhost:3000 ...
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+* using HTTP/1.x
+> GET / HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.15.0
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 404 Not Found
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Content-Security-Policy: default-src 'none'
+< X-Content-Type-Options: nosniff
+< Content-Type: text/html; charset=utf-8
+< Content-Length: 139
+< Date: Thu, 30 Jul 2026 00:15:41 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< 
+{ [139 bytes data]
+100   139  100   139    0     0  26137      0 --:--:-- --:--:-- --:--:-- 27800
+* Connection #0 to host localhost left intact
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /</pre>
+</body>
+</html>
+
+📤 Pushing log...
